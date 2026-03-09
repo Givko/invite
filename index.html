@@ -9,7 +9,7 @@
   :root {
     --green-deep:#1B3A2D;--green:#2A5A3F;--green-mid:#3D7A5A;--green-light:#5A9E78;--green-pale:#A8D5BA;
     --lav-deep:#6B5B8A;--lav:#9B8EC4;--lav-mid:#B8ACE0;--lav-light:#D4CCF0;--lav-pale:#EDE8FA;--lav-mist:#F5F2FF;
-    --cream:#FDFBF7;--gold:#C9A84C;--charcoal:#1E1E1E;--text:#2D2D2D;
+    --cream:#FDFBF7;--gold:#B8953F;--gold-pale:#D4C08A;--charcoal:#1E1E1E;--text:#2D2D2D;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -38,6 +38,23 @@
   @keyframes swayLeft{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-1.5deg)}75%{transform:rotate(1deg)}}
   @keyframes swayRight{0%,100%{transform:rotate(0deg)}30%{transform:rotate(1.2deg)}70%{transform:rotate(-1.8deg)}}
   @keyframes swayCenter{0%,100%{transform:rotate(0deg)}50%{transform:rotate(1deg)}}
+
+  /* ── Bushes ── */
+  .bushes-container{position:absolute;bottom:0;left:0;right:0;height:25%;pointer-events:none;z-index:1}
+  .bush{position:absolute;bottom:0}
+
+  /* ── Hanging vines ── */
+  .vines-container{position:absolute;top:0;left:0;right:0;height:100%;pointer-events:none;z-index:2;overflow:hidden}
+  .vine{
+    position:absolute;top:0;
+    animation:vineSway ease-in-out infinite;
+    transform-origin:top center;
+  }
+  @keyframes vineSway{
+    0%,100%{transform:rotate(0deg)}
+    30%{transform:rotate(1.5deg)}
+    70%{transform:rotate(-1.2deg)}
+  }
 
   /* ── Falling leaves ── */
   .leaves-container{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2}
@@ -137,15 +154,15 @@
 
   /* Hero content */
   .hero-content{position:relative;z-index:10;text-align:center;max-width:600px}
-  .hero-eyebrow{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--lav-light);font-weight:300;margin-bottom:24px}
+  .hero-eyebrow{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--gold-pale);font-weight:300;margin-bottom:24px}
   .hero-name{
     font-family:'Marck Script',cursive;font-weight:400;
     font-size:clamp(56px,15vw,96px);
-    color:#fff;line-height:.95;
-    text-shadow:0 4px 30px rgba(0,0,0,.25),0 0 80px rgba(155,142,196,.2);
+    color:var(--gold);line-height:.95;
+    text-shadow:0 4px 30px rgba(0,0,0,.25),0 0 80px rgba(201,168,76,.3);
   }
-  .hero-amp{font-family:'Cormorant Garamond',serif;font-size:28px;font-style:italic;font-weight:300;color:var(--lav-mid);margin:4px 0;display:block}
-  .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--green-pale);font-weight:300;margin-top:24px;line-height:1.8}
+  .hero-amp{font-family:'Cormorant Garamond',serif;font-size:28px;font-style:italic;font-weight:300;color:var(--gold-pale);margin:4px 0;display:block}
+  .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--gold-pale);font-weight:300;margin-top:24px;line-height:1.8}
   .hero-date-box{
     display:inline-block;margin-top:32px;
     border:1px solid rgba(255,255,255,.15);border-radius:6px;
@@ -153,9 +170,9 @@
     background:rgba(255,255,255,.06);
     backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   }
-  .hero-date{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,32px);color:#fff;font-weight:400;letter-spacing:2px}
-  .hero-venue{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--lav-light);font-style:italic;margin-top:8px}
-  .hero-countdown{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--green-pale);margin-top:28px;font-weight:300}
+  .hero-date{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,32px);color:var(--gold);font-weight:400;letter-spacing:2px}
+  .hero-venue{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold-pale);font-style:italic;margin-top:8px}
+  .hero-countdown{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold-pale);margin-top:28px;font-weight:300}
   .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:10;animation:bounce 2s infinite;cursor:pointer}
   .scroll-hint svg{opacity:.5;transition:opacity .3s}
   .scroll-hint:hover svg{opacity:1}
@@ -310,6 +327,12 @@
 
   <!-- Animated Trees -->
   <div class="trees-bg" id="treesContainer"></div>
+
+  <!-- Bushes at base -->
+  <div class="bushes-container" id="bushesContainer"></div>
+
+  <!-- Hanging vines -->
+  <div class="vines-container" id="vinesContainer"></div>
 
   <!-- Ground mist -->
   <div class="ground-mist"></div>
@@ -490,12 +513,23 @@
     ];
 
     var trees=[
-      {x:-2, h:90, op:.25, sw:'Left',  trunk:{w:14,h:80},  crown:{rx:70,ry:85, leaves:280}},
-      {x:6,  h:75, op:.35, sw:'Center',trunk:{w:12,h:70},  crown:{rx:60,ry:75, leaves:240}},
-      {x:14, h:60, op:.18, sw:'Right', trunk:{w:10,h:60},  crown:{rx:48,ry:60, leaves:180}},
-      {x:102,h:95, op:.22, sw:'Right', trunk:{w:14,h:85},  crown:{rx:75,ry:90, leaves:300}},
-      {x:90, h:70, op:.3,  sw:'Left',  trunk:{w:12,h:65},  crown:{rx:58,ry:72, leaves:220}},
-      {x:80, h:55, op:.15, sw:'Center',trunk:{w:9,h:50},   crown:{rx:42,ry:52, leaves:150}}
+      // Left side — layered depth
+      {x:-5, h:95, op:.28, sw:'Left',  trunk:{w:16,h:75},  crown:{rx:80,ry:95, leaves:320}},
+      {x:4,  h:80, op:.38, sw:'Center',trunk:{w:13,h:65},  crown:{rx:65,ry:80, leaves:260}},
+      {x:12, h:65, op:.2,  sw:'Right', trunk:{w:11,h:55},  crown:{rx:52,ry:62, leaves:200}},
+      {x:20, h:50, op:.12, sw:'Left',  trunk:{w:8,h:45},   crown:{rx:38,ry:46, leaves:130}},
+      {x:-8, h:70, op:.15, sw:'Right', trunk:{w:10,h:55},  crown:{rx:48,ry:58, leaves:180}},
+      // Right side — layered depth
+      {x:105,h:98, op:.25, sw:'Right', trunk:{w:16,h:80},  crown:{rx:82,ry:98, leaves:340}},
+      {x:92, h:78, op:.35, sw:'Left',  trunk:{w:13,h:62},  crown:{rx:62,ry:76, leaves:250}},
+      {x:84, h:62, op:.18, sw:'Center',trunk:{w:10,h:50},  crown:{rx:46,ry:55, leaves:170}},
+      {x:76, h:48, op:.1,  sw:'Right', trunk:{w:8,h:42},   crown:{rx:35,ry:42, leaves:120}},
+      {x:108,h:72, op:.14, sw:'Center',trunk:{w:10,h:52},  crown:{rx:50,ry:60, leaves:185}},
+      // Background mid trees (behind content)
+      {x:30, h:45, op:.08, sw:'Left',  trunk:{w:7,h:38},   crown:{rx:30,ry:36, leaves:90}},
+      {x:42, h:40, op:.06, sw:'Right', trunk:{w:6,h:34},   crown:{rx:26,ry:32, leaves:75}},
+      {x:55, h:42, op:.07, sw:'Center',trunk:{w:6,h:36},   crown:{rx:28,ry:34, leaves:80}},
+      {x:68, h:38, op:.06, sw:'Left',  trunk:{w:6,h:32},   crown:{rx:24,ry:30, leaves:70}}
     ];
 
     trees.forEach(function(t,ti){
@@ -582,7 +616,7 @@
   (function(){
     var c = document.getElementById('leaves');
     var leafColors = ['#2A5A3F','#3D7A5A','#5A9E78','#1B3A2D','#A8D5BA'];
-    for(var i=0;i<28;i++){
+    for(var i=0;i<45;i++){
       var el = document.createElement('div');
       el.className = 'leaf';
       var s = Math.random()*10+8;
@@ -597,7 +631,7 @@
   (function(){
     var c = document.getElementById('lavenderPetals');
     var petalColors = ['#B8ACE0','#D4CCF0','#9B8EC4','#EDE8FA'];
-    for(var i=0;i<35;i++){
+    for(var i=0;i<55;i++){
       var el = document.createElement('div');
       el.className = 'lavender-petal';
       var s = Math.random()*8+6;
@@ -611,14 +645,14 @@
   // ── Create fireflies ──
   (function(){
     var c = document.getElementById('fireflies');
-    for(var i=0;i<50;i++){
+    for(var i=0;i<80;i++){
       var el = document.createElement('div');
       el.className = 'firefly';
       var s = Math.random()*5+2;
-      el.style.cssText = 'width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;top:'+(15+Math.random()*75)+'%;animation-duration:'+(Math.random()*6+3)+'s;animation-delay:'+(Math.random()*14)+'s;';
+      el.style.cssText = 'width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;top:'+(10+Math.random()*80)+'%;animation-duration:'+(Math.random()*6+3)+'s;animation-delay:'+(Math.random()*14)+'s;';
       c.appendChild(el);
     }
-    for(var i=0;i<35;i++){
+    for(var i=0;i<55;i++){
       var el = document.createElement('div');
       el.className = 'twinkle';
       var s = Math.random()*3+1;
@@ -647,6 +681,105 @@
       entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
     },{threshold:.15,rootMargin:'0px 0px -40px 0px'});
     els.forEach(function(el){ obs.observe(el); });
+  })();
+
+  // ── Generate bushes ──
+  (function(){
+    var NS='http://www.w3.org/2000/svg';
+    var container=document.getElementById('bushesContainer');
+    var bushColors=[['#14281a','#1a3222','#1e3c2a','#224632','#28503a'],['#122418','#162e1e','#1c3828','#204230','#264c38']];
+    var bushes=[
+      {x:0,w:18,h:12,op:.4},{x:8,w:14,h:10,op:.3},{x:16,w:10,h:8,op:.2},
+      {x:24,w:12,h:9,op:.15},{x:35,w:8,h:6,op:.08},{x:42,w:7,h:5,op:.06},
+      {x:55,w:7,h:5,op:.06},{x:62,w:8,h:6,op:.08},{x:72,w:12,h:9,op:.15},
+      {x:78,w:10,h:8,op:.2},{x:85,w:14,h:10,op:.3},{x:94,w:18,h:12,op:.4},
+      {x:-4,w:15,h:11,op:.35},{x:100,w:15,h:11,op:.35},
+      {x:48,w:6,h:4,op:.05},{x:68,w:6,h:4,op:.05}
+    ];
+    bushes.forEach(function(b,bi){
+      var palette=bushColors[bi%bushColors.length];
+      var svg=document.createElementNS(NS,'svg');
+      svg.setAttribute('class','bush');
+      svg.setAttribute('viewBox','0 0 100 60');
+      svg.setAttribute('style','left:'+b.x+'%;width:'+b.w+'%;height:'+b.h+'%;opacity:'+b.op+';');
+      // 30-50 small leaves per bush
+      var numLeaves=30+Math.floor(Math.random()*20);
+      for(var i=0;i<numLeaves;i++){
+        var lx=15+Math.random()*70;
+        var ly=10+Math.random()*35;
+        var ls=3+Math.random()*5;
+        var col=palette[Math.floor(Math.random()*palette.length)];
+        var leaf=document.createElementNS(NS,'ellipse');
+        leaf.setAttribute('cx',lx);
+        leaf.setAttribute('cy',ly);
+        leaf.setAttribute('rx',ls);
+        leaf.setAttribute('ry',ls*0.6);
+        leaf.setAttribute('fill',col);
+        leaf.setAttribute('transform','rotate('+(Math.random()*360)+','+lx+','+ly+')');
+        leaf.setAttribute('opacity',(0.5+Math.random()*0.5).toFixed(2));
+        svg.appendChild(leaf);
+      }
+      container.appendChild(svg);
+    });
+  })();
+
+  // ── Generate hanging vines ──
+  (function(){
+    var NS='http://www.w3.org/2000/svg';
+    var container=document.getElementById('vinesContainer');
+    var vinePositions=[
+      {x:2,len:220,op:.2},{x:7,len:160,op:.15},{x:13,len:280,op:.25},
+      {x:18,len:130,op:.12},{x:22,len:180,op:.1},
+      {x:78,len:190,op:.1},{x:82,len:140,op:.12},{x:87,len:260,op:.25},
+      {x:93,len:170,op:.15},{x:98,len:230,op:.2},
+      {x:28,len:80,op:.05},{x:72,len:80,op:.05},
+      {x:35,len:60,op:.04},{x:65,len:60,op:.04}
+    ];
+    var vineGreens=['#1a3525','#1e3e2c','#224832','#183020','#1c3828'];
+    vinePositions.forEach(function(v,vi){
+      var el=document.createElement('div');
+      el.className='vine';
+      var svgW=30;
+      var svgH=v.len;
+      var svg=document.createElementNS(NS,'svg');
+      svg.setAttribute('viewBox','0 0 '+svgW+' '+svgH);
+      svg.setAttribute('width',svgW);
+      svg.setAttribute('height',svgH);
+      // Main vine stem — wavy line
+      var cx=svgW/2;
+      var d='M'+cx+',0';
+      var segments=Math.floor(svgH/25);
+      for(var s=1;s<=segments;s++){
+        var sy=s*25;
+        var sx=cx+Math.sin(s*0.8+vi)*5;
+        d+=' Q'+(sx+(s%2===0?4:-4))+','+(sy-12)+' '+sx+','+sy;
+      }
+      var stem=document.createElementNS(NS,'path');
+      stem.setAttribute('d',d);
+      stem.setAttribute('fill','none');
+      stem.setAttribute('stroke','#1a3020');
+      stem.setAttribute('stroke-width','1.5');
+      stem.setAttribute('opacity','0.6');
+      svg.appendChild(stem);
+      // Small leaves along the vine
+      var leafCount=Math.floor(svgH/20);
+      for(var i=0;i<leafCount;i++){
+        var ly=15+i*(svgH-20)/leafCount+Math.random()*8;
+        var lx=cx+Math.sin(i*0.8+vi)*5;
+        var side=i%2===0?1:-1;
+        var col=vineGreens[Math.floor(Math.random()*vineGreens.length)];
+        var leafEl=document.createElementNS(NS,'path');
+        var lSize=3+Math.random()*3;
+        leafEl.setAttribute('d','M0,0 C'+side*lSize+',-'+lSize+' '+side*(lSize+2)+',-1 '+side*2+','+lSize*0.5);
+        leafEl.setAttribute('transform','translate('+lx.toFixed(1)+','+ly.toFixed(1)+')');
+        leafEl.setAttribute('fill',col);
+        leafEl.setAttribute('opacity',(0.4+Math.random()*0.4).toFixed(2));
+        svg.appendChild(leafEl);
+      }
+      el.appendChild(svg);
+      el.style.cssText='left:'+v.x+'%;opacity:'+v.op+';animation-duration:'+(5+Math.random()*6)+'s;animation-delay:'+(Math.random()*4)+'s;';
+      container.appendChild(el);
+    });
   })();
 
   // ── Form logic ──
