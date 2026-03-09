@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Живко & Катерина — Сватбена покана</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep:#1B3A2D;--green:#2A5A3F;--green-mid:#3D7A5A;--green-light:#5A9E78;--green-pale:#A8D5BA;
+    --lav-deep:#6B5B8A;--lav:#9B8EC4;--lav-mid:#B8ACE0;--lav-light:#D4CCF0;--lav-pale:#EDE8FA;--lav-mist:#F5F2FF;
+    --cream:#FDFBF7;--gold:#C9A84C;--charcoal:#1E1E1E;--text:#2D2D2D;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{min-height:100vh;background:var(--cream);font-family:'Nunito Sans',sans-serif;color:var(--text);overflow-x:hidden}
+
+  /* ══════ HERO ══════ */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;padding:40px 24px;
+    background:linear-gradient(175deg,#0f2a1c 0%,var(--green-deep) 30%,var(--green) 60%,var(--lav-deep) 100%);
+  }
+  .hero::after{
+    content:'';position:absolute;inset:0;
+    background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+    opacity:.4;pointer-events:none;z-index:1;
+  }
+
+  /* ── Animated trees ── */
+  .trees-bg{position:absolute;bottom:0;left:0;right:0;height:100%;pointer-events:none;z-index:0}
+  .tree{position:absolute;bottom:0;transform-origin:bottom center}
+  .tree-trunk{fill:#1a2f20}
+  .tree-crown{transform-origin:bottom center}
+  .tree-left .tree-crown{animation:swayLeft 6s ease-in-out infinite}
+  .tree-right .tree-crown{animation:swayRight 7s ease-in-out infinite}
+  .tree-center .tree-crown{animation:swayCenter 8s ease-in-out infinite}
+  @keyframes swayLeft{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-1.5deg)}75%{transform:rotate(1deg)}}
+  @keyframes swayRight{0%,100%{transform:rotate(0deg)}30%{transform:rotate(1.2deg)}70%{transform:rotate(-1.8deg)}}
+  @keyframes swayCenter{0%,100%{transform:rotate(0deg)}50%{transform:rotate(1deg)}}
+
+  /* ── Falling leaves ── */
+  .leaves-container{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2}
+  .leaf{
+    position:absolute;top:-40px;
+    width:16px;height:16px;
+    animation:leafFall linear infinite;
+    opacity:0;
+  }
+  @keyframes leafFall{
+    0%{transform:translateY(0) rotate(0deg) translateX(0);opacity:0}
+    5%{opacity:.7}
+    50%{transform:translateY(50vh) rotate(180deg) translateX(40px);opacity:.6}
+    100%{transform:translateY(105vh) rotate(360deg) translateX(-20px);opacity:0}
+  }
+
+  /* ── Fireflies ── */
+  .fireflies{position:absolute;inset:0;pointer-events:none;z-index:2}
+  .firefly{
+    position:absolute;width:4px;height:4px;border-radius:50%;
+    background:radial-gradient(circle,rgba(201,168,76,.9),rgba(201,168,76,0) 70%);
+    animation:fireflyFloat linear infinite;
+    opacity:0;
+  }
+  @keyframes fireflyFloat{
+    0%{opacity:0;transform:translate(0,0) scale(.5)}
+    15%{opacity:1}
+    50%{transform:translate(30px,-50px) scale(1);opacity:.8}
+    85%{opacity:1}
+    100%{opacity:0;transform:translate(-20px,-100px) scale(.3)}
+  }
+
+  /* ── Lavender flowers ── */
+  .lavender-container{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2}
+  .lavender-petal{
+    position:absolute;top:-30px;
+    animation:petalDrift linear infinite;
+    opacity:0;
+  }
+  @keyframes petalDrift{
+    0%{transform:translateY(0) rotate(0deg) translateX(0) scale(.8);opacity:0}
+    8%{opacity:.8}
+    40%{transform:translateY(40vh) rotate(120deg) translateX(60px) scale(1);opacity:.7}
+    70%{transform:translateY(70vh) rotate(240deg) translateX(-30px) scale(.9);opacity:.5}
+    100%{transform:translateY(110vh) rotate(360deg) translateX(20px) scale(.6);opacity:0}
+  }
+
+  /* ── Floating particles ── */
+  .particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2}
+  .particle{position:absolute;border-radius:50%;animation:floatUp linear infinite;opacity:0}
+  @keyframes floatUp{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-20vh) scale(1);opacity:0}}
+
+  /* ── Light rays ── */
+  .light-rays{
+    position:absolute;top:-20%;left:50%;width:200%;height:60%;
+    transform:translateX(-50%);pointer-events:none;z-index:1;
+    background:conic-gradient(from 190deg at 50% 0%,transparent 30%,rgba(201,168,76,.03) 35%,transparent 40%,
+      transparent 45%,rgba(255,255,255,.02) 48%,transparent 52%,transparent 60%,rgba(168,213,186,.02) 63%,transparent 67%);
+    animation:rayRotate 30s linear infinite;
+  }
+  @keyframes rayRotate{from{transform:translateX(-50%) rotate(0deg)}to{transform:translateX(-50%) rotate(360deg)}}
+
+  /* ── Ground mist ── */
+  .ground-mist{
+    position:absolute;bottom:0;left:-10%;width:120%;height:180px;
+    pointer-events:none;z-index:3;
+    background:linear-gradient(to top,rgba(27,58,45,.6) 0%,rgba(27,58,45,.2) 40%,transparent 100%);
+    animation:mistDrift 12s ease-in-out infinite;
+  }
+  @keyframes mistDrift{0%,100%{transform:translateX(0)}50%{transform:translateX(20px)}}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(.22,1,.36,1)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal-d1{transition-delay:.15s}.reveal-d2{transition-delay:.3s}.reveal-d3{transition-delay:.5s}
+  .reveal-d4{transition-delay:.7s}.reveal-d5{transition-delay:.9s}.reveal-d6{transition-delay:1.1s}
+
+  /* Hero content */
+  .hero-content{position:relative;z-index:10;text-align:center;max-width:600px}
+  .hero-eyebrow{font-size:11px;letter-spacing:6px;text-transform:uppercase;color:var(--lav-light);font-weight:300;margin-bottom:24px}
+  .hero-name{
+    font-family:'Tangerine',cursive;font-weight:700;
+    font-size:clamp(70px,18vw,120px);
+    color:#fff;line-height:.95;
+    text-shadow:0 4px 30px rgba(0,0,0,.25),0 0 80px rgba(155,142,196,.2);
+  }
+  .hero-amp{font-family:'Cormorant Garamond',serif;font-size:28px;font-style:italic;font-weight:300;color:var(--lav-mid);margin:4px 0;display:block}
+  .hero-tagline{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--green-pale);font-weight:300;margin-top:24px;line-height:1.8}
+  .hero-date-box{
+    display:inline-block;margin-top:32px;
+    border:1px solid rgba(255,255,255,.15);border-radius:6px;
+    padding:22px 44px;
+    background:rgba(255,255,255,.06);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+  .hero-date{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,32px);color:#fff;font-weight:400;letter-spacing:2px}
+  .hero-venue{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--lav-light);font-style:italic;margin-top:8px}
+  .hero-countdown{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--green-pale);margin-top:28px;font-weight:300}
+  .scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:10;animation:bounce 2s infinite;cursor:pointer}
+  .scroll-hint svg{opacity:.5;transition:opacity .3s}
+  .scroll-hint:hover svg{opacity:1}
+  @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
+
+  /* ══════ WAVE ══════ */
+  .wave-section{position:relative;height:100px;background:var(--cream);margin-top:-1px}
+  .wave-section svg{position:absolute;top:-79px;width:100%;height:80px}
+
+  /* ══════ DETAILS ══════ */
+  .details{background:var(--cream);padding:60px 24px 40px;position:relative;overflow:hidden}
+
+  /* Animated lavender stems in details bg */
+  .details-bg-flowers{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;overflow:hidden;opacity:.06}
+  .stem{position:absolute;bottom:0}
+  .stem svg{animation:stemSway 5s ease-in-out infinite}
+  @keyframes stemSway{0%,100%{transform:rotate(0deg)}50%{transform:rotate(2deg)}}
+  .stem:nth-child(even) svg{animation-duration:6s;animation-direction:reverse}
+
+  .details-inner{max-width:560px;margin:0 auto;text-align:center;position:relative;z-index:1}
+  .section-title{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:5px;text-transform:uppercase;color:var(--lav-deep);font-weight:500;margin-bottom:16px}
+  .details-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--green-deep);line-height:1.8;font-weight:400}
+
+  .ornament{text-align:center;margin:36px 0}
+  .ornament svg{opacity:.35}
+
+  .info-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px auto;max-width:440px}
+  @media(max-width:480px){.info-cards{grid-template-columns:1fr}}
+  .info-card{
+    background:linear-gradient(135deg,var(--lav-pale),var(--lav-mist));
+    border-radius:12px;padding:24px 20px;text-align:center;
+    border:1px solid rgba(107,91,138,.08);
+    transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s ease;
+  }
+  .info-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(107,91,138,.15)}
+  .info-card-icon{font-size:24px;margin-bottom:8px}
+  .info-card-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--lav-deep);font-weight:600;margin-bottom:4px}
+  .info-card-value{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--green-deep);font-weight:500}
+
+  /* ══════ RSVP ══════ */
+  .rsvp-section{
+    background:linear-gradient(175deg,var(--cream) 0%,var(--lav-pale) 50%,var(--lav-mist) 100%);
+    padding:60px 24px 80px;position:relative;
+  }
+  .rsvp-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--lav-mid),transparent)}
+  .rsvp-inner{max-width:560px;margin:0 auto;text-align:center}
+
+  .btn-rsvp{
+    font-family:'Nunito Sans',sans-serif;font-size:12px;letter-spacing:5px;
+    text-transform:uppercase;font-weight:600;
+    background:linear-gradient(135deg,var(--green),var(--green-mid));
+    border:none;color:#fff;padding:18px 56px;
+    cursor:pointer;border-radius:50px;
+    transition:all .4s cubic-bezier(.22,1,.36,1);
+    box-shadow:0 4px 20px rgba(42,90,63,.3);position:relative;overflow:hidden;
+  }
+  .btn-rsvp::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--lav-deep),var(--lav));opacity:0;transition:opacity .4s;border-radius:50px}
+  .btn-rsvp:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(42,90,63,.4)}
+  .btn-rsvp:hover::after{opacity:1}
+  .btn-rsvp span{position:relative;z-index:1}
+
+  .form-container{
+    background:#fff;border-radius:16px;padding:44px 32px;margin-top:32px;
+    box-shadow:0 12px 48px rgba(107,91,138,.1),0 2px 8px rgba(42,90,63,.05);
+    border:1px solid rgba(107,91,138,.08);
+    display:none;text-align:left;animation:slideUp .6s cubic-bezier(.22,1,.36,1) forwards;
+  }
+  .form-container.active{display:block}
+  @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+  .form-title{font-family:'Tangerine',cursive;font-size:48px;font-weight:700;text-align:center;color:var(--green-deep);margin-bottom:4px}
+  .form-subtitle{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--lav-deep);text-align:center;margin-bottom:32px}
+
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+  @media(max-width:480px){.form-row{grid-template-columns:1fr}}
+  .field label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--lav-deep);font-weight:600;display:block;margin-bottom:8px}
+  .field input,.field select,.field textarea{
+    width:100%;padding:12px 16px;border:1.5px solid var(--lav-light);border-radius:8px;
+    background:var(--lav-mist);font-family:'Nunito Sans',sans-serif;font-size:14px;color:var(--text);
+    outline:none;transition:all .3s ease;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--green-mid);background:#fff;box-shadow:0 0 0 3px rgba(90,158,120,.1)}
+  .field input::placeholder,.field textarea::placeholder{color:#aaa;font-style:italic}
+  .field select{cursor:pointer;appearance:none;background:var(--lav-mist) url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B5B8A' fill='none' stroke-width='1.2'/%3E%3C/svg%3E") no-repeat right 16px center}
+  .field textarea{resize:none;min-height:80px}
+
+  .radio-group{display:flex;gap:12px;flex-wrap:wrap}
+  .radio-option{
+    flex:1;min-width:160px;display:flex;align-items:center;gap:10px;
+    cursor:pointer;padding:14px 18px;border:1.5px solid var(--lav-light);border-radius:10px;
+    background:var(--lav-mist);transition:all .3s ease;font-size:13px;color:var(--text);
+  }
+  .radio-option:hover{border-color:var(--lav-mid);background:var(--lav-pale)}
+  .radio-option.selected{border-color:var(--green);background:rgba(42,90,63,.06);color:var(--green-deep);font-weight:600;box-shadow:0 2px 12px rgba(42,90,63,.1)}
+  .radio-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0;border:2px solid var(--lav-mid);display:flex;align-items:center;justify-content:center;transition:all .3s}
+  .radio-option.selected .radio-dot{border-color:var(--green);background:var(--green)}
+  .radio-dot-inner{width:6px;height:6px;border-radius:50%;background:#fff;display:none}
+  .radio-option.selected .radio-dot-inner{display:block}
+
+  .options-box{background:linear-gradient(135deg,var(--lav-mist),#fff);border-radius:12px;padding:24px;margin-bottom:24px;border:1px solid rgba(107,91,138,.1)}
+  .options-box>label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--lav-deep);font-weight:600;display:block;margin-bottom:14px}
+
+  .checkbox-row{display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:10px 0;user-select:none;transition:opacity .2s}
+  .checkbox-row:hover{opacity:.8}
+  .checkbox-box{width:22px;height:22px;flex-shrink:0;margin-top:1px;border:2px solid var(--lav-mid);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .25s ease}
+  .checkbox-box.checked{background:var(--green);border-color:var(--green)}
+  .checkbox-box svg{display:none}
+  .checkbox-box.checked svg{display:block}
+  .checkbox-label{font-size:14px;color:var(--text);line-height:1.5}
+
+  .sub-field{margin-left:34px;margin-bottom:8px;display:none;animation:slideUp .3s ease}
+  .sub-field.active{display:block}
+  .sub-field label{font-size:9px!important;margin-bottom:6px!important}
+  .sub-field select{width:160px;font-size:13px;padding:10px 14px}
+
+  .attending-fields{display:none;animation:slideUp .4s ease}
+  .attending-fields.active{display:block}
+
+  .btn-submit{
+    font-family:'Nunito Sans',sans-serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;font-weight:600;
+    background:linear-gradient(135deg,var(--green-deep),var(--green));border:none;border-radius:50px;color:#fff;
+    padding:16px 56px;cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);box-shadow:0 4px 20px rgba(42,90,63,.25);
+  }
+  .btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(42,90,63,.35)}
+  .btn-submit:disabled{background:var(--lav-light);color:rgba(255,255,255,.5);box-shadow:none;cursor:default;transform:none}
+
+  .success{text-align:center;padding:60px 24px;display:none;animation:slideUp .6s cubic-bezier(.22,1,.36,1) forwards}
+  .success.active{display:block}
+  .success-check{
+    width:64px;height:64px;border-radius:50%;
+    background:linear-gradient(135deg,var(--green),var(--green-mid));
+    display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px;
+    box-shadow:0 8px 32px rgba(42,90,63,.2);animation:popIn .5s cubic-bezier(.17,.89,.32,1.3) .2s both;
+  }
+  @keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+  .success h3{font-family:'Tangerine',cursive;font-size:46px;font-weight:700;color:var(--green-deep);margin-bottom:8px}
+  .success p{font-size:15px;color:var(--lav-deep);font-weight:300;line-height:1.7}
+
+  .footer{background:var(--green-deep);padding:40px 24px;text-align:center;position:relative}
+  .footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green-mid),transparent)}
+  .footer p{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--green-pale)}
+  .footer-hearts{margin-bottom:12px;opacity:.4}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="hero">
+
+  <!-- Light rays -->
+  <div class="light-rays"></div>
+
+  <!-- Animated Trees -->
+  <div class="trees-bg">
+    <!-- Left far tree -->
+    <svg class="tree tree-left" style="left:-2%;height:90%;opacity:.25" viewBox="0 0 120 400">
+      <rect class="tree-trunk" x="52" y="180" width="16" height="220" rx="4"/>
+      <g class="tree-crown">
+        <ellipse cx="60" cy="160" rx="55" ry="70" fill="#1a3a25"/>
+        <ellipse cx="60" cy="110" rx="42" ry="55" fill="#1f4230"/>
+        <ellipse cx="60" cy="70" rx="30" ry="40" fill="#254a35"/>
+      </g>
+    </svg>
+    <!-- Left mid tree -->
+    <svg class="tree tree-center" style="left:6%;height:75%;opacity:.35" viewBox="0 0 100 350">
+      <rect class="tree-trunk" x="43" y="160" width="14" height="190" rx="3"/>
+      <g class="tree-crown">
+        <ellipse cx="50" cy="140" rx="45" ry="60" fill="#1d3f2a"/>
+        <ellipse cx="50" cy="95" rx="35" ry="45" fill="#234830"/>
+        <ellipse cx="50" cy="60" rx="24" ry="32" fill="#2a5038"/>
+      </g>
+    </svg>
+    <!-- Left near tree -->
+    <svg class="tree tree-right" style="left:14%;height:60%;opacity:.18" viewBox="0 0 80 300">
+      <rect class="tree-trunk" x="34" y="140" width="12" height="160" rx="3"/>
+      <g class="tree-crown">
+        <ellipse cx="40" cy="120" rx="36" ry="50" fill="#1a3525"/>
+        <ellipse cx="40" cy="80" rx="28" ry="38" fill="#20402c"/>
+        <ellipse cx="40" cy="50" rx="18" ry="26" fill="#274a34"/>
+      </g>
+    </svg>
+    <!-- Right far tree -->
+    <svg class="tree tree-right" style="right:-3%;height:95%;opacity:.22" viewBox="0 0 130 420">
+      <rect class="tree-trunk" x="57" y="190" width="16" height="230" rx="4"/>
+      <g class="tree-crown">
+        <ellipse cx="65" cy="170" rx="58" ry="75" fill="#182f20"/>
+        <ellipse cx="65" cy="115" rx="45" ry="58" fill="#1e3a28"/>
+        <ellipse cx="65" cy="70" rx="32" ry="42" fill="#244230"/>
+      </g>
+    </svg>
+    <!-- Right mid tree -->
+    <svg class="tree tree-left" style="right:8%;height:70%;opacity:.3" viewBox="0 0 100 320">
+      <rect class="tree-trunk" x="43" y="150" width="14" height="170" rx="3"/>
+      <g class="tree-crown">
+        <ellipse cx="50" cy="130" rx="44" ry="55" fill="#1b3626"/>
+        <ellipse cx="50" cy="85" rx="34" ry="42" fill="#21402e"/>
+        <ellipse cx="50" cy="52" rx="22" ry="30" fill="#284a36"/>
+      </g>
+    </svg>
+    <!-- Right near -->
+    <svg class="tree tree-center" style="right:18%;height:55%;opacity:.15" viewBox="0 0 70 260">
+      <rect class="tree-trunk" x="30" y="120" width="10" height="140" rx="2"/>
+      <g class="tree-crown">
+        <ellipse cx="35" cy="105" rx="30" ry="42" fill="#1a3525"/>
+        <ellipse cx="35" cy="72" rx="22" ry="30" fill="#20402c"/>
+        <ellipse cx="35" cy="48" rx="15" ry="22" fill="#264832"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Ground mist -->
+  <div class="ground-mist"></div>
+
+  <!-- Falling leaves -->
+  <div class="leaves-container" id="leaves"></div>
+
+  <!-- Lavender petals -->
+  <div class="lavender-container" id="lavenderPetals"></div>
+
+  <!-- Fireflies -->
+  <div class="fireflies" id="fireflies"></div>
+
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal reveal-d1">Заедно със семействата си</p>
+    <h1 class="hero-name reveal reveal-d2">Живко</h1>
+    <span class="hero-amp reveal reveal-d3">&amp;</span>
+    <h1 class="hero-name reveal reveal-d3">Катерина</h1>
+    <p class="hero-tagline reveal reveal-d4">Имаме удоволствието да Ви поканим<br>на тържеството по случай нашата сватба</p>
+    <div class="hero-date-box reveal reveal-d5">
+      <p class="hero-date">29 юни 2026</p>
+      <p class="hero-venue">Estera Vini</p>
+    </div>
+    <p class="hero-countdown reveal reveal-d6" id="countdown"></p>
+  </div>
+
+  <a class="scroll-hint reveal reveal-d6" onclick="document.getElementById('details').scrollIntoView({behavior:'smooth'})">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"><path d="M7 11l7 7 7-7"/></svg>
+  </a>
+</section>
+
+<div class="wave-section">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0,0 C360,80 1080,0 1440,60 L1440,80 L0,80 Z" fill="var(--cream)"/>
+  </svg>
+</div>
+
+<!-- ═══════════════ DETAILS ═══════════════ -->
+<section class="details" id="details">
+  <!-- Background lavender stems -->
+  <div class="details-bg-flowers">
+    <div class="stem" style="left:5%;height:300px">
+      <svg width="40" height="300" viewBox="0 0 40 300" style="transform-origin:bottom center">
+        <path d="M20,300 Q18,200 20,100" fill="none" stroke="#9B8EC4" stroke-width="2"/>
+        <ellipse cx="20" cy="95" rx="5" ry="9" fill="#B8ACE0"/><ellipse cx="14" cy="105" rx="4" ry="8" fill="#D4CCF0"/>
+        <ellipse cx="26" cy="102" rx="4" ry="8" fill="#B8ACE0"/><ellipse cx="20" cy="80" rx="4" ry="7" fill="#D4CCF0"/>
+        <ellipse cx="16" cy="88" rx="3" ry="6" fill="#EDE8FA"/>
+      </svg>
+    </div>
+    <div class="stem" style="right:8%;height:250px">
+      <svg width="40" height="250" viewBox="0 0 40 250" style="transform-origin:bottom center">
+        <path d="M20,250 Q22,160 20,80" fill="none" stroke="#9B8EC4" stroke-width="2"/>
+        <ellipse cx="20" cy="75" rx="5" ry="9" fill="#B8ACE0"/><ellipse cx="14" cy="85" rx="4" ry="8" fill="#D4CCF0"/>
+        <ellipse cx="26" cy="82" rx="4" ry="8" fill="#B8ACE0"/><ellipse cx="20" cy="62" rx="4" ry="7" fill="#D4CCF0"/>
+      </svg>
+    </div>
+    <div class="stem" style="left:85%;height:280px">
+      <svg width="40" height="280" viewBox="0 0 40 280" style="transform-origin:bottom center">
+        <path d="M20,280 Q17,180 20,90" fill="none" stroke="#9B8EC4" stroke-width="1.5"/>
+        <ellipse cx="20" cy="85" rx="5" ry="8" fill="#B8ACE0"/><ellipse cx="15" cy="93" rx="4" ry="7" fill="#D4CCF0"/>
+        <ellipse cx="25" cy="90" rx="4" ry="7" fill="#B8ACE0"/><ellipse cx="20" cy="72" rx="3" ry="6" fill="#EDE8FA"/>
+      </svg>
+    </div>
+    <div class="stem" style="left:15%;height:220px">
+      <svg width="40" height="220" viewBox="0 0 40 220" style="transform-origin:bottom center">
+        <path d="M20,220 Q22,140 20,70" fill="none" stroke="#9B8EC4" stroke-width="1.5"/>
+        <ellipse cx="20" cy="65" rx="4" ry="8" fill="#B8ACE0"/><ellipse cx="15" cy="73" rx="3" ry="6" fill="#D4CCF0"/>
+        <ellipse cx="25" cy="70" rx="3" ry="6" fill="#B8ACE0"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="details-inner">
+    <p class="section-title reveal">Детайли за тържеството</p>
+    <p class="details-text reveal reveal-d1">Заповядайте на една вълшебна вечер сред<br>лозята и горите на Естера Вини</p>
+    <div class="ornament reveal reveal-d2">
+      <svg width="120" height="24" viewBox="0 0 120 24"><line x1="5" y1="12" x2="50" y2="12" stroke="var(--lav-mid)" stroke-width=".5"/><line x1="70" y1="12" x2="115" y2="12" stroke="var(--lav-mid)" stroke-width=".5"/><circle cx="60" cy="12" r="3" fill="none" stroke="var(--lav)" stroke-width=".8"/><circle cx="60" cy="12" r="1" fill="var(--lav)"/></svg>
+    </div>
+    <div class="info-cards">
+      <div class="info-card reveal reveal-d2"><div class="info-card-icon">📅</div><div class="info-card-label">Дата</div><div class="info-card-value">29 юни 2026</div></div>
+      <div class="info-card reveal reveal-d3"><div class="info-card-icon">📍</div><div class="info-card-label">Място</div><div class="info-card-value">Естера Вини</div></div>
+      <div class="info-card reveal reveal-d4"><div class="info-card-icon">🕐</div><div class="info-card-label">Церемония</div><div class="info-card-value">Предстои уточняване</div></div>
+      <div class="info-card reveal reveal-d5"><div class="info-card-icon">👗</div><div class="info-card-label">Дрескод</div><div class="info-card-value">Официален</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ RSVP ═══════════════ -->
+<section class="rsvp-section" id="rsvp">
+  <div class="rsvp-inner">
+    <p class="section-title reveal">Потвърдете присъствие</p>
+    <p class="details-text reveal reveal-d1" style="margin-bottom:8px">Моля, отговорете до 1 юни 2026</p>
+    <div id="rsvpPrompt" class="reveal reveal-d2" style="margin-top:28px">
+      <button type="button" class="btn-rsvp" onclick="openForm()"><span>Потвърди</span></button>
+    </div>
+
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none"></iframe>
+
+    <div class="form-container" id="rsvpFormContainer">
+      <h3 class="form-title">Потвърждение</h3>
+      <p class="form-subtitle">Ще се радваме да чуем от Вас</p>
+      <form action="https://formsubmit.co/milevjivko@gmail.com" method="POST" target="hidden_iframe" onsubmit="return handleSubmit()">
+        <input type="hidden" name="_subject" id="subjectField" value="Сватба RSVP">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="box">
+        <input type="hidden" name="_replyto" value="noreply@wedding.com">
+        <input type="text" name="_honey" style="display:none" tabindex="-1">
+        <input type="hidden" name="RSVP Details" id="summaryField" value="">
+
+        <div class="form-row">
+          <div class="field"><label>Вашето име *</label><input type="text" id="guestName" placeholder="Име и фамилия" required></div>
+          <div class="field"><label>Имейл</label><input type="text" id="guestEmail" placeholder="вашият@email.com" autocomplete="email"></div>
+        </div>
+        <div class="field" style="margin-bottom:24px">
+          <label style="margin-bottom:12px">Ще присъствате ли? *</label>
+          <div class="radio-group">
+            <div class="radio-option" onclick="selectAttending(this,'С радост приемам')"><span class="radio-dot"><span class="radio-dot-inner"></span></span>С радост приемам</div>
+            <div class="radio-option" onclick="selectAttending(this,'За съжаление не мога')"><span class="radio-dot"><span class="radio-dot-inner"></span></span>За съжаление не мога</div>
+          </div>
+        </div>
+        <div class="attending-fields" id="attendingFields">
+          <div class="form-row">
+            <div class="field"><label>Брой гости</label><select id="guestCount"><option value="1">1 гост</option><option value="2">2 гости</option><option value="3">3 гости</option><option value="4">4 гости</option><option value="5">5 гости</option></select></div>
+            <div class="field"><label>Хранителни изисквания</label><input type="text" id="dietary" placeholder="Алергии, вегетарианец и т.н."></div>
+          </div>
+          <div class="options-box">
+            <label>Допълнителни опции</label>
+            <div class="checkbox-row" onclick="toggleCheck('hotel')"><div class="checkbox-box" id="hotelBox"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3,7 L6,10 L11,4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="checkbox-label">Моля, резервирайте ми хотелска стая</span></div>
+            <div class="sub-field" id="hotelSub"><div class="field"><label>Колко нощувки?</label><select id="hotelNightsSelect"><option value="1">1 нощ</option><option value="2">2 нощи</option><option value="3">3 нощи</option><option value="4">4 нощи</option></select></div></div>
+            <div class="checkbox-row" onclick="toggleCheck('transport')"><div class="checkbox-box" id="transportBox"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3,7 L6,10 L11,4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="checkbox-label">Бих искал/а транспорт до/от мястото</span></div>
+            <div class="checkbox-row" onclick="toggleCheck('children')"><div class="checkbox-box" id="childrenBox"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3,7 L6,10 L11,4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="checkbox-label">Ще водя деца</span></div>
+            <div class="sub-field" id="childrenSub"><div class="field"><label>Колко деца?</label><select id="childrenCountSelect"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></div></div>
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:32px"><label>Послание за двойката</label><textarea id="guestMessage" placeholder="Споделете пожеланията си..."></textarea></div>
+        <div style="text-align:center"><button type="submit" class="btn-submit" id="submitBtn" disabled>Изпрати</button></div>
+      </form>
+    </div>
+
+    <div class="success" id="successMsg">
+      <div class="success-check"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14.5l5 5L21 9"/></svg></div>
+      <h3 id="thankName">Благодарим Ви!</h3>
+      <p id="thankMsg"></p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-hearts"><svg width="24" height="24" viewBox="0 0 24 24" fill="var(--lav-mid)"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+  <p>С любов, Живко &amp; Катерина</p>
+</footer>
+
+<script>
+  // Countdown
+  var wedding = new Date('2026-06-29');
+  var daysLeft = Math.max(0, Math.ceil((wedding - new Date()) / 86400000));
+  document.getElementById('countdown').textContent = daysLeft + ' дни до сватбата';
+
+  // ── Create falling leaves ──
+  (function(){
+    var c = document.getElementById('leaves');
+    var leafColors = ['#2A5A3F','#3D7A5A','#5A9E78','#1B3A2D','#A8D5BA'];
+    for(var i=0;i<18;i++){
+      var el = document.createElement('div');
+      el.className = 'leaf';
+      var s = Math.random()*10+8;
+      var col = leafColors[Math.floor(Math.random()*leafColors.length)];
+      el.innerHTML = '<svg width="'+s+'" height="'+s+'" viewBox="0 0 16 16"><path d="M8,1 Q14,5 12,12 Q8,10 4,12 Q2,5 8,1Z" fill="'+col+'" opacity="'+(Math.random()*.4+.3)+'"/></svg>';
+      el.style.cssText = 'left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*10+10)+'s;animation-delay:'+(Math.random()*15)+'s;';
+      c.appendChild(el);
+    }
+  })();
+
+  // ── Create lavender petals ──
+  (function(){
+    var c = document.getElementById('lavenderPetals');
+    var petalColors = ['#B8ACE0','#D4CCF0','#9B8EC4','#EDE8FA'];
+    for(var i=0;i<14;i++){
+      var el = document.createElement('div');
+      el.className = 'lavender-petal';
+      var s = Math.random()*8+6;
+      var col = petalColors[Math.floor(Math.random()*petalColors.length)];
+      el.innerHTML = '<svg width="'+s+'" height="'+(s*1.5)+'" viewBox="0 0 10 15"><ellipse cx="5" cy="7.5" rx="4" ry="7" fill="'+col+'" opacity="'+(Math.random()*.5+.3)+'"/></svg>';
+      el.style.cssText = 'left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*14+12)+'s;animation-delay:'+(Math.random()*18)+'s;';
+      c.appendChild(el);
+    }
+  })();
+
+  // ── Create fireflies ──
+  (function(){
+    var c = document.getElementById('fireflies');
+    for(var i=0;i<20;i++){
+      var el = document.createElement('div');
+      el.className = 'firefly';
+      var s = Math.random()*4+2;
+      el.style.cssText = 'width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;top:'+(30+Math.random()*60)+'%;animation-duration:'+(Math.random()*6+4)+'s;animation-delay:'+(Math.random()*10)+'s;';
+      c.appendChild(el);
+    }
+  })();
+
+  // ── Create particles ──
+  (function(){
+    var c = document.getElementById('particles');
+    var colors = ['rgba(155,142,196,.3)','rgba(212,204,240,.2)','rgba(168,213,186,.2)','rgba(255,255,255,.1)'];
+    for(var i=0;i<25;i++){
+      var el = document.createElement('div');
+      el.className = 'particle';
+      var s = Math.random()*5+2;
+      el.style.cssText = 'width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;background:'+colors[Math.floor(Math.random()*colors.length)]+';animation-duration:'+(Math.random()*12+8)+'s;animation-delay:'+(Math.random()*10)+'s;';
+      c.appendChild(el);
+    }
+  })();
+
+  // ── Scroll reveal ──
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
+    },{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){ obs.observe(el); });
+  })();
+
+  // ── Form logic ──
+  var attending='';var checks={hotel:false,transport:false,children:false};
+  function openForm(){document.getElementById('rsvpPrompt').style.display='none';var fc=document.getElementById('rsvpFormContainer');fc.classList.add('active');setTimeout(function(){fc.scrollIntoView({behavior:'smooth',block:'start'});},100);}
+  function selectAttending(el,value){attending=value;var o=document.querySelectorAll('.radio-option');for(var i=0;i<o.length;i++)o[i].classList.remove('selected');el.classList.add('selected');if(value==='С радост приемам')document.getElementById('attendingFields').classList.add('active');else document.getElementById('attendingFields').classList.remove('active');updateBtn();}
+  function toggleCheck(type){checks[type]=!checks[type];var b=document.getElementById(type+'Box');if(checks[type])b.classList.add('checked');else b.classList.remove('checked');if(type==='hotel'){var h=document.getElementById('hotelSub');if(checks[type])h.classList.add('active');else h.classList.remove('active');}if(type==='children'){var c=document.getElementById('childrenSub');if(checks[type])c.classList.add('active');else c.classList.remove('active');}}
+  function updateBtn(){var n=document.getElementById('guestName').value.trim();document.getElementById('submitBtn').disabled=!(n&&attending);}
+  document.getElementById('guestName').addEventListener('input',updateBtn);
+  function handleSubmit(){
+    var name=document.getElementById('guestName').value.trim();if(!name||!attending)return false;
+    var l=[];
+    l.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');l.push('');
+    l.push('  Име на гост:       '+name);
+    l.push('  Имейл:            '+(document.getElementById('guestEmail').value||'Не е посочен'));
+    l.push('');l.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');l.push('');
+    if(attending==='С радост приемам'){l.push('  ✅  ПРИСЪСТВА — С радост приемам');}else{l.push('  ❌  НЕ ПРИСЪСТВА — За съжаление не мога');}
+    l.push('');l.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    if(attending==='С радост приемам'){
+      l.push('');l.push('  Брой гости:       '+document.getElementById('guestCount').value);
+      l.push('  Хранителни нужди: '+(document.getElementById('dietary').value||'Няма'));
+      l.push('');l.push('  ── Опции ──');l.push('');
+      l.push('  Хотелска стая:    '+(checks.hotel?'Да — '+document.getElementById('hotelNightsSelect').value+' нощ(и)':'Не'));
+      l.push('  Транспорт:        '+(checks.transport?'Да':'Не'));
+      l.push('  Деца:             '+(checks.children?'Да — '+document.getElementById('childrenCountSelect').value+' дете(а)':'Не'));
+      l.push('');l.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    }
+    var msg=document.getElementById('guestMessage').value;
+    if(msg){l.push('');l.push('  💌 Послание:');l.push('');l.push('  "'+msg+'"');l.push('');l.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');}
+    document.getElementById('summaryField').value=l.join('\n');
+    var emoji=attending==='С радост приемам'?'✅':'❌';
+    document.getElementById('subjectField').value=emoji+' Сватба RSVP — '+name+' — '+attending;
+    var ge=document.getElementById('guestEmail').value.trim();
+    if(ge&&ge!=='milevjivko@gmail.com'){document.querySelector('input[name="_replyto"]').value=ge;}
+    setTimeout(function(){
+      document.getElementById('rsvpFormContainer').style.display='none';
+      var s=document.getElementById('successMsg');s.classList.add('active');
+      document.getElementById('thankName').textContent='Благодарим Ви, '+name+'!';
+      document.getElementById('thankMsg').textContent=attending==='С радост приемам'?"Нямаме търпение да празнуваме заедно с Вас!":"Ще ни липсвате. Благодарим, че ни уведомихте.";
+      s.scrollIntoView({behavior:'smooth',block:'center'});
+    },300);
+    return true;
+  }
+</script>
+</body>
+</html>
