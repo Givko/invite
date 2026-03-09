@@ -1146,10 +1146,18 @@
       <form action="https://formsubmit.co/milevjivko@gmail.com" method="POST" target="hidden_iframe" onsubmit="return handleSubmit()">
         <input type="hidden" name="_subject" id="subjectField" value="Сватба RSVP">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="box">
+        <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_replyto" value="noreply@wedding.com">
         <input type="text" name="_honey" style="display:none" tabindex="-1">
-        <input type="hidden" name="RSVP Details" id="summaryField" value="">
+        <input type="hidden" name="👤 Име" id="fldName" value="">
+        <input type="hidden" name="📧 Имейл" id="fldEmail" value="">
+        <input type="hidden" name="✉️ Отговор" id="fldAttending" value="">
+        <input type="hidden" name="👥 Брой гости" id="fldGuests" value="">
+        <input type="hidden" name="🍽️ Хранителни изисквания" id="fldDietary" value="">
+        <input type="hidden" name="🏨 Хотелска стая" id="fldHotel" value="">
+        <input type="hidden" name="🚗 Транспорт" id="fldTransport" value="">
+        <input type="hidden" name="👶 Деца" id="fldChildren" value="">
+        <input type="hidden" name="💌 Послание" id="fldMessage" value="">
 
         <div class="form-row">
           <div class="field"><label>Вашето име *</label><input type="text" id="guestName" placeholder="Име и фамилия" required></div>
@@ -1717,53 +1725,45 @@
     var name = document.getElementById('guestName').value.trim();
     if (!name || !attending) return false;
 
-    var l = [];
-    l.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    l.push('');
-    l.push('  Име на гост:       ' + name);
-    l.push('  Имейл:            ' + (document.getElementById('guestEmail').value || 'Не е посочен'));
-    l.push('');
-    l.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    l.push('');
+    var email = document.getElementById('guestEmail').value || 'Не е посочен';
+    var isAttending = attending === 'С радост приемам';
 
-    if (attending === 'С радост приемам') {
-      l.push('  ✅  ПРИСЪСТВА — С радост приемам');
+    // Populate individual fields
+    document.getElementById('fldName').value = name;
+    document.getElementById('fldEmail').value = email;
+    document.getElementById('fldAttending').value = isAttending
+      ? '✅ С радост приемам'
+      : '❌ За съжаление не мога';
+
+    if (isAttending) {
+      document.getElementById('fldGuests').value = document.getElementById('guestCount').value + ' гост(и)';
+      document.getElementById('fldDietary').value = document.getElementById('dietary').value || 'Няма';
+      document.getElementById('fldHotel').value = checks.hotel ? 'Да — 1 нощ (29 юни)' : 'Не';
+      document.getElementById('fldTransport').value = checks.transport ? 'Да' : 'Не';
+      document.getElementById('fldChildren').value = checks.children
+        ? 'Да — ' + document.getElementById('childrenCountSelect').value + ' дете(а)'
+        : 'Не';
     } else {
-      l.push('  ❌  НЕ ПРИСЪСТВА — За съжаление не мога');
-    }
-
-    l.push('');
-    l.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-
-    if (attending === 'С радост приемам') {
-      l.push('');
-      l.push('  Брой гости:       ' + document.getElementById('guestCount').value);
-      l.push('  Хранителни нужди: ' + (document.getElementById('dietary').value || 'Няма'));
-      l.push('');
-      l.push('  ── Опции ──');
-      l.push('');
-      l.push('  Хотелска стая:    ' + (checks.hotel ? 'Да — 1 нощ (29 юни)' : 'Не'));
-      l.push('  Транспорт:        ' + (checks.transport ? 'Да' : 'Не'));
-      l.push('  Деца:             ' + (checks.children ? 'Да — ' + document.getElementById('childrenCountSelect').value + ' дете(а)' : 'Не'));
-      l.push('');
-      l.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      // Remove unnecessary fields for non-attending guests
+      document.getElementById('fldGuests').disabled = true;
+      document.getElementById('fldDietary').disabled = true;
+      document.getElementById('fldHotel').disabled = true;
+      document.getElementById('fldTransport').disabled = true;
+      document.getElementById('fldChildren').disabled = true;
     }
 
     var msg = document.getElementById('guestMessage').value;
     if (msg) {
-      l.push('');
-      l.push('  💌 Послание:');
-      l.push('');
-      l.push('  "' + msg + '"');
-      l.push('');
-      l.push('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+      document.getElementById('fldMessage').value = msg;
+    } else {
+      document.getElementById('fldMessage').disabled = true;
     }
 
-    document.getElementById('summaryField').value = l.join('\n');
-
-    var emoji = attending === 'С радост приемам' ? '✅' : '❌';
+    // Subject line with emoji
+    var emoji = isAttending ? '✅' : '❌';
     document.getElementById('subjectField').value = emoji + ' Сватба RSVP — ' + name + ' — ' + attending;
 
+    // Reply-to
     var ge = document.getElementById('guestEmail').value.trim();
     if (ge && ge !== 'milevjivko@gmail.com') {
       document.querySelector('input[name="_replyto"]').value = ge;
@@ -1774,7 +1774,7 @@
       var s = document.getElementById('successMsg');
       s.classList.add('active');
       document.getElementById('thankName').textContent = 'Благодарим Ви, ' + name + '!';
-      document.getElementById('thankMsg').textContent = attending === 'С радост приемам'
+      document.getElementById('thankMsg').textContent = isAttending
         ? "Нямаме търпение да празнуваме заедно с Вас!"
         : "Ще ни липсвате. Благодарим, че ни уведомихте.";
       s.scrollIntoView({ behavior: 'smooth', block: 'center' });
