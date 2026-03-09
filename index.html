@@ -46,9 +46,19 @@
   @keyframes swayRight{0%,100%{transform:rotate(0deg)}30%{transform:rotate(1.2deg)}70%{transform:rotate(-1.8deg)}}
   @keyframes swayCenter{0%,100%{transform:rotate(0deg)}50%{transform:rotate(1deg)}}
 
-  /* ── Bushes ── */
-  .bushes-container{position:absolute;bottom:0;left:0;right:0;height:25%;pointer-events:none;z-index:3}
-  .bush{position:absolute;bottom:0}
+  /* ── Tent tables ── */
+  .tents-container{position:absolute;bottom:5%;left:0;right:0;height:80%;pointer-events:none;z-index:2}
+  .tent-group{position:absolute;bottom:0}
+  .tent-light{
+    position:absolute;width:3px;height:3px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,220,130,1),rgba(255,220,130,0) 70%);
+    box-shadow:0 0 4px 2px rgba(255,200,80,.5),0 0 8px 4px rgba(255,200,80,.2);
+    animation:tentLightGlow 2s ease-in-out infinite alternate;
+  }
+  @keyframes tentLightGlow{
+    0%{opacity:.6;transform:scale(.8)}
+    100%{opacity:1;transform:scale(1.1)}
+  }
 
   /* ── Hanging vines ── */
   .vines-container{position:absolute;top:0;left:0;right:0;height:100%;pointer-events:none;z-index:4;overflow:hidden}
@@ -355,8 +365,8 @@
   <!-- Animated Trees -->
   <div class="trees-bg" id="treesContainer"></div>
 
-  <!-- Bushes at base -->
-  <div class="bushes-container" id="bushesContainer"></div>
+  <!-- Tent tables -->
+  <div class="tents-container" id="tentsContainer"></div>
 
   <!-- Hanging vines -->
   <div class="vines-container" id="vinesContainer"></div>
@@ -726,45 +736,201 @@
     els.forEach(function(el){ obs.observe(el); });
   })();
 
-  // ── Generate bushes ──
+  // ── Generate tent tables with lights ──
   (function(){
     var NS='http://www.w3.org/2000/svg';
-    var container=document.getElementById('bushesContainer');
-    var bushColors=[['#14281a','#1a3222','#1e3c2a','#224632','#28503a'],['#122418','#162e1e','#1c3828','#204230','#264c38']];
-    var bushes=[
-      {x:0,w:18,h:12,op:.4},{x:8,w:14,h:10,op:.3},{x:16,w:10,h:8,op:.2},
-      {x:24,w:12,h:9,op:.15},{x:35,w:8,h:6,op:.08},{x:42,w:7,h:5,op:.06},
-      {x:55,w:7,h:5,op:.06},{x:62,w:8,h:6,op:.08},{x:72,w:12,h:9,op:.15},
-      {x:78,w:10,h:8,op:.2},{x:85,w:14,h:10,op:.3},{x:94,w:18,h:12,op:.4},
-      {x:-4,w:15,h:11,op:.35},{x:100,w:15,h:11,op:.35},
-      {x:48,w:6,h:4,op:.05},{x:68,w:6,h:4,op:.05},
-      {x:5,w:10,h:7,op:.22},{x:88,w:11,h:8,op:.25},
-      {x:30,w:8,h:5,op:.08},{x:58,w:7,h:5,op:.07},
-      {x:-8,w:16,h:10,op:.3},{x:103,w:14,h:9,op:.28}
+    var container=document.getElementById('tentsContainer');
+    var tents=[
+      {x:15, w:22, h:50, op:.7},
+      {x:35, w:18, h:42, op:.55},
+      {x:52, w:18, h:42, op:.55},
+      {x:68, w:22, h:50, op:.7}
     ];
-    bushes.forEach(function(b,bi){
-      var palette=bushColors[bi%bushColors.length];
+    tents.forEach(function(t,ti){
+      var svgW=120;
+      var svgH=100;
       var svg=document.createElementNS(NS,'svg');
-      svg.setAttribute('class','bush');
-      svg.setAttribute('viewBox','0 0 100 60');
-      svg.setAttribute('style','left:'+b.x+'%;width:'+b.w+'%;height:'+b.h+'%;opacity:'+b.op+';');
-      // 30-50 small leaves per bush
-      var numLeaves=30+Math.floor(Math.random()*20);
-      for(var i=0;i<numLeaves;i++){
-        var lx=15+Math.random()*70;
-        var ly=10+Math.random()*35;
-        var ls=3+Math.random()*5;
-        var col=palette[Math.floor(Math.random()*palette.length)];
-        var leaf=document.createElementNS(NS,'ellipse');
-        leaf.setAttribute('cx',lx);
-        leaf.setAttribute('cy',ly);
-        leaf.setAttribute('rx',ls);
-        leaf.setAttribute('ry',ls*0.6);
-        leaf.setAttribute('fill',col);
-        leaf.setAttribute('transform','rotate('+(Math.random()*360)+','+lx+','+ly+')');
-        leaf.setAttribute('opacity',(0.5+Math.random()*0.5).toFixed(2));
-        svg.appendChild(leaf);
-      }
+      svg.setAttribute('class','tent-group');
+      svg.setAttribute('viewBox','0 0 '+svgW+' '+svgH);
+      svg.setAttribute('style','left:'+t.x+'%;width:'+t.w+'%;height:'+t.h+'%;opacity:'+t.op+';');
+
+      // Tent poles
+      var poleL=document.createElementNS(NS,'line');
+      poleL.setAttribute('x1','15');poleL.setAttribute('y1','20');
+      poleL.setAttribute('x2','20');poleL.setAttribute('y2','95');
+      poleL.setAttribute('stroke','#2a1a0e');poleL.setAttribute('stroke-width','2');
+      svg.appendChild(poleL);
+      var poleR=document.createElementNS(NS,'line');
+      poleR.setAttribute('x1','105');poleR.setAttribute('y1','20');
+      poleR.setAttribute('x2','100');poleR.setAttribute('y2','95');
+      poleR.setAttribute('stroke','#2a1a0e');poleR.setAttribute('stroke-width','2');
+      svg.appendChild(poleR);
+
+      // Tent canopy (draped fabric)
+      var canopy=document.createElementNS(NS,'path');
+      canopy.setAttribute('d','M12,22 Q35,8 60,5 Q85,8 108,22 Q90,18 60,15 Q30,18 12,22Z');
+      canopy.setAttribute('fill','rgba(245,240,230,.08)');
+      canopy.setAttribute('stroke','rgba(245,240,230,.12)');
+      canopy.setAttribute('stroke-width','0.5');
+      svg.appendChild(canopy);
+      // Canopy drape sides
+      var drapL=document.createElementNS(NS,'path');
+      drapL.setAttribute('d','M12,22 Q14,40 18,55');
+      drapL.setAttribute('fill','none');drapL.setAttribute('stroke','rgba(245,240,230,.08)');
+      drapL.setAttribute('stroke-width','0.8');
+      svg.appendChild(drapL);
+      var drapR=document.createElementNS(NS,'path');
+      drapR.setAttribute('d','M108,22 Q106,40 102,55');
+      drapR.setAttribute('fill','none');drapR.setAttribute('stroke','rgba(245,240,230,.08)');
+      drapR.setAttribute('stroke-width','0.8');
+      svg.appendChild(drapR);
+
+      // String lights across the canopy
+      var stringPath=document.createElementNS(NS,'path');
+      stringPath.setAttribute('d','M18,24 Q40,30 60,28 Q80,30 102,24');
+      stringPath.setAttribute('fill','none');
+      stringPath.setAttribute('stroke','rgba(180,160,100,.15)');
+      stringPath.setAttribute('stroke-width','0.4');
+      svg.appendChild(stringPath);
+      // Second string
+      var stringPath2=document.createElementNS(NS,'path');
+      stringPath2.setAttribute('d','M22,28 Q42,35 60,33 Q78,35 98,28');
+      stringPath2.setAttribute('fill','none');
+      stringPath2.setAttribute('stroke','rgba(180,160,100,.12)');
+      stringPath2.setAttribute('stroke-width','0.4');
+      svg.appendChild(stringPath2);
+
+      // Bulbs along strings
+      var bulbPositions=[
+        {x:25,y:26},{x:35,y:28},{x:45,y:29},{x:55,y:28},{x:65,y:29},{x:75,y:28},{x:85,y:26},{x:95,y:24},
+        {x:30,y:31},{x:40,y:33},{x:50,y:34},{x:60,y:33},{x:70,y:34},{x:80,y:32},{x:90,y:29}
+      ];
+      bulbPositions.forEach(function(b,bi){
+        var bulb=document.createElementNS(NS,'circle');
+        bulb.setAttribute('cx',b.x);
+        bulb.setAttribute('cy',b.y);
+        bulb.setAttribute('r',1+Math.random()*0.5);
+        bulb.setAttribute('fill','rgba(255,220,130,.7)');
+        // Glow
+        var glow=document.createElementNS(NS,'circle');
+        glow.setAttribute('cx',b.x);
+        glow.setAttribute('cy',b.y);
+        glow.setAttribute('r',3+Math.random()*2);
+        glow.setAttribute('fill','rgba(255,200,80,.08)');
+        svg.appendChild(glow);
+        svg.appendChild(bulb);
+      });
+
+      // Table
+      var tableTop=document.createElementNS(NS,'ellipse');
+      tableTop.setAttribute('cx','60');tableTop.setAttribute('cy','82');
+      tableTop.setAttribute('rx','18');tableTop.setAttribute('ry','4');
+      tableTop.setAttribute('fill','#2a1a0e');tableTop.setAttribute('opacity','0.6');
+      svg.appendChild(tableTop);
+      // Table leg
+      var leg=document.createElementNS(NS,'line');
+      leg.setAttribute('x1','60');leg.setAttribute('y1','85');
+      leg.setAttribute('x2','60');leg.setAttribute('y2','95');
+      leg.setAttribute('stroke','#2a1a0e');leg.setAttribute('stroke-width','2.5');
+      leg.setAttribute('opacity','0.5');
+      svg.appendChild(leg);
+      // Table base
+      var base=document.createElementNS(NS,'ellipse');
+      base.setAttribute('cx','60');base.setAttribute('cy','95');
+      base.setAttribute('rx','10');base.setAttribute('ry','2');
+      base.setAttribute('fill','#2a1a0e');base.setAttribute('opacity','0.4');
+      svg.appendChild(base);
+
+      // Chairs (small rounded shapes)
+      var chairs=[{x:38,y:86},{x:82,y:86},{x:48,y:90},{x:72,y:90}];
+      chairs.forEach(function(ch){
+        var chair=document.createElementNS(NS,'path');
+        var dir=ch.x<60?1:-1;
+        chair.setAttribute('d','M'+ch.x+','+ch.y+' q'+dir*3+',-5 '+dir*1+',-8 q'+dir*2+',0 '+dir*3+',2 q0,4 -'+dir*4+',6Z');
+        chair.setAttribute('fill','#1e1208');
+        chair.setAttribute('opacity','0.4');
+        svg.appendChild(chair);
+      });
+
+      // ── Table decorations ──
+
+      // Small flower bouquet (center of table)
+      var flowerColors=['#B8ACE0','#D4CCF0','#9B8EC4','#c9a0dc'];
+      var stemG=document.createElementNS(NS,'g');
+      // Small vase
+      var vase=document.createElementNS(NS,'path');
+      vase.setAttribute('d','M58.5,81 Q58,79 58.5,78 L61.5,78 Q62,79 61.5,81Z');
+      vase.setAttribute('fill','rgba(180,160,130,.6)');
+      stemG.appendChild(vase);
+      // Flower stems
+      var fstems=[{x:59.5,y:78,bx:58,by:75},{x:60,y:78,bx:60,by:74},{x:60.5,y:78,bx:62,by:75}];
+      fstems.forEach(function(fs,fi){
+        var st=document.createElementNS(NS,'path');
+        st.setAttribute('d','M'+fs.x+','+fs.y+' Q'+fs.bx+','+(fs.by+1)+' '+fs.bx+','+fs.by);
+        st.setAttribute('fill','none');st.setAttribute('stroke','#2a5030');
+        st.setAttribute('stroke-width','0.4');st.setAttribute('opacity','0.7');
+        stemG.appendChild(st);
+        var fc=document.createElementNS(NS,'circle');
+        fc.setAttribute('cx',fs.bx);fc.setAttribute('cy',fs.by);
+        fc.setAttribute('r',1.2);
+        fc.setAttribute('fill',flowerColors[fi%flowerColors.length]);
+        fc.setAttribute('opacity','0.8');
+        stemG.appendChild(fc);
+      });
+      svg.appendChild(stemG);
+
+      // Small candle in front of flowers
+      var candleStick=document.createElementNS(NS,'rect');
+      candleStick.setAttribute('x','63');candleStick.setAttribute('y','79.5');
+      candleStick.setAttribute('width','1.2');candleStick.setAttribute('height','3');
+      candleStick.setAttribute('rx','0.3');
+      candleStick.setAttribute('fill','#f5eedc');candleStick.setAttribute('opacity','0.8');
+      svg.appendChild(candleStick);
+      var flame=document.createElementNS(NS,'path');
+      flame.setAttribute('d','M63.6,79.5 Q63,78.5 63.6,77.5 Q64.2,78.5 63.6,79.5Z');
+      flame.setAttribute('fill','rgba(255,200,80,.85)');
+      svg.appendChild(flame);
+      var flameGlow=document.createElementNS(NS,'circle');
+      flameGlow.setAttribute('cx','63.6');flameGlow.setAttribute('cy','78.5');
+      flameGlow.setAttribute('r','2.5');
+      flameGlow.setAttribute('fill','rgba(255,200,80,.05)');
+      svg.appendChild(flameGlow);
+
+      // Wine glasses (one on each side)
+      var glassPositions=[{x:50},{x:70}];
+      glassPositions.forEach(function(gl){
+        var glass=document.createElementNS(NS,'g');
+        var bowl=document.createElementNS(NS,'path');
+        bowl.setAttribute('d','M'+(gl.x-2)+',79 Q'+(gl.x-2.5)+',76.5 '+gl.x+',75.5 Q'+(gl.x+2.5)+',76.5 '+(gl.x+2)+',79Z');
+        bowl.setAttribute('fill','rgba(255,255,255,.12)');
+        bowl.setAttribute('stroke','rgba(255,255,255,.18)');
+        bowl.setAttribute('stroke-width','0.3');
+        glass.appendChild(bowl);
+        var wine=document.createElementNS(NS,'path');
+        wine.setAttribute('d','M'+(gl.x-1.5)+',78.5 Q'+(gl.x-2)+',77 '+gl.x+',76.5 Q'+(gl.x+2)+',77 '+(gl.x+1.5)+',78.5Z');
+        wine.setAttribute('fill','rgba(120,30,50,.35)');
+        glass.appendChild(wine);
+        var gstem=document.createElementNS(NS,'line');
+        gstem.setAttribute('x1',gl.x);gstem.setAttribute('y1','79');
+        gstem.setAttribute('x2',gl.x);gstem.setAttribute('y2','81.5');
+        gstem.setAttribute('stroke','rgba(255,255,255,.18)');
+        gstem.setAttribute('stroke-width','0.4');
+        glass.appendChild(gstem);
+        var gbase=document.createElementNS(NS,'ellipse');
+        gbase.setAttribute('cx',gl.x);gbase.setAttribute('cy','81.5');
+        gbase.setAttribute('rx','1.5');gbase.setAttribute('ry','0.4');
+        gbase.setAttribute('fill','rgba(255,255,255,.12)');
+        glass.appendChild(gbase);
+        svg.appendChild(glass);
+      });
+
+      // Warm light pool under tent
+      var warmth=document.createElementNS(NS,'ellipse');
+      warmth.setAttribute('cx','60');warmth.setAttribute('cy','80');
+      warmth.setAttribute('rx','30');warmth.setAttribute('ry','18');
+      warmth.setAttribute('fill','rgba(255,200,100,.03)');
+      svg.appendChild(warmth);
+
       container.appendChild(svg);
     });
   })();
