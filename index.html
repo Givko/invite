@@ -514,29 +514,29 @@
 
     var trees=[
       // Left side — layered depth
-      {x:-5, h:95, op:.45, sw:'Left',  trunk:{w:16,h:75},  crown:{rx:80,ry:95, leaves:320}},
-      {x:4,  h:80, op:.55, sw:'Center',trunk:{w:13,h:65},  crown:{rx:65,ry:80, leaves:260}},
-      {x:12, h:65, op:.35, sw:'Right', trunk:{w:11,h:55},  crown:{rx:52,ry:62, leaves:200}},
-      {x:20, h:50, op:.22, sw:'Left',  trunk:{w:8,h:45},   crown:{rx:38,ry:46, leaves:130}},
-      {x:-8, h:70, op:.28, sw:'Right', trunk:{w:10,h:55},  crown:{rx:48,ry:58, leaves:180}},
+      {x:-5, h:95, op:.7,  sw:'Left',  trunk:{w:16,h:75},  crown:{rx:80,ry:95, leaves:320}},
+      {x:4,  h:80, op:.8,  sw:'Center',trunk:{w:13,h:65},  crown:{rx:65,ry:80, leaves:260}},
+      {x:12, h:65, op:.55, sw:'Right', trunk:{w:11,h:55},  crown:{rx:52,ry:62, leaves:200}},
+      {x:20, h:50, op:.4,  sw:'Left',  trunk:{w:8,h:45},   crown:{rx:38,ry:46, leaves:130}},
+      {x:-8, h:70, op:.5,  sw:'Right', trunk:{w:10,h:55},  crown:{rx:48,ry:58, leaves:180}},
       // Right side — layered depth
-      {x:105,h:98, op:.42, sw:'Right', trunk:{w:16,h:80},  crown:{rx:82,ry:98, leaves:340}},
-      {x:92, h:78, op:.52, sw:'Left',  trunk:{w:13,h:62},  crown:{rx:62,ry:76, leaves:250}},
-      {x:84, h:62, op:.32, sw:'Center',trunk:{w:10,h:50},  crown:{rx:46,ry:55, leaves:170}},
-      {x:76, h:48, op:.2,  sw:'Right', trunk:{w:8,h:42},   crown:{rx:35,ry:42, leaves:120}},
-      {x:108,h:72, op:.25, sw:'Center',trunk:{w:10,h:52},  crown:{rx:50,ry:60, leaves:185}},
+      {x:105,h:98, op:.65, sw:'Right', trunk:{w:16,h:80},  crown:{rx:82,ry:98, leaves:340}},
+      {x:92, h:78, op:.75, sw:'Left',  trunk:{w:13,h:62},  crown:{rx:62,ry:76, leaves:250}},
+      {x:84, h:62, op:.5,  sw:'Center',trunk:{w:10,h:50},  crown:{rx:46,ry:55, leaves:170}},
+      {x:76, h:48, op:.35, sw:'Right', trunk:{w:8,h:42},   crown:{rx:35,ry:42, leaves:120}},
+      {x:108,h:72, op:.45, sw:'Center',trunk:{w:10,h:52},  crown:{rx:50,ry:60, leaves:185}},
       // Extra depth trees
-      {x:-12,h:60, op:.2,  sw:'Center',trunk:{w:9,h:48},   crown:{rx:42,ry:50, leaves:150}},
-      {x:112,h:62, op:.2,  sw:'Left',  trunk:{w:9,h:50},   crown:{rx:44,ry:52, leaves:155}},
-      {x:26, h:55, op:.18, sw:'Right', trunk:{w:8,h:42},   crown:{rx:36,ry:44, leaves:115}},
-      {x:72, h:52, op:.16, sw:'Left',  trunk:{w:8,h:40},   crown:{rx:34,ry:42, leaves:110}},
+      {x:-12,h:60, op:.38, sw:'Center',trunk:{w:9,h:48},   crown:{rx:42,ry:50, leaves:150}},
+      {x:112,h:62, op:.38, sw:'Left',  trunk:{w:9,h:50},   crown:{rx:44,ry:52, leaves:155}},
+      {x:26, h:55, op:.32, sw:'Right', trunk:{w:8,h:42},   crown:{rx:36,ry:44, leaves:115}},
+      {x:72, h:52, op:.3,  sw:'Left',  trunk:{w:8,h:40},   crown:{rx:34,ry:42, leaves:110}},
       // Background mid trees (behind content)
-      {x:30, h:45, op:.14, sw:'Left',  trunk:{w:7,h:38},   crown:{rx:30,ry:36, leaves:90}},
-      {x:42, h:40, op:.12, sw:'Right', trunk:{w:6,h:34},   crown:{rx:26,ry:32, leaves:75}},
-      {x:55, h:42, op:.13, sw:'Center',trunk:{w:6,h:36},   crown:{rx:28,ry:34, leaves:80}},
-      {x:68, h:38, op:.12, sw:'Left',  trunk:{w:6,h:32},   crown:{rx:24,ry:30, leaves:70}},
-      {x:38, h:35, op:.1,  sw:'Right', trunk:{w:5,h:28},   crown:{rx:22,ry:26, leaves:60}},
-      {x:60, h:36, op:.1,  sw:'Center',trunk:{w:5,h:30},   crown:{rx:23,ry:28, leaves:65}}
+      {x:30, h:45, op:.25, sw:'Left',  trunk:{w:7,h:38},   crown:{rx:30,ry:36, leaves:90}},
+      {x:42, h:40, op:.22, sw:'Right', trunk:{w:6,h:34},   crown:{rx:26,ry:32, leaves:75}},
+      {x:55, h:42, op:.23, sw:'Center',trunk:{w:6,h:36},   crown:{rx:28,ry:34, leaves:80}},
+      {x:68, h:38, op:.22, sw:'Left',  trunk:{w:6,h:32},   crown:{rx:24,ry:30, leaves:70}},
+      {x:38, h:35, op:.18, sw:'Right', trunk:{w:5,h:28},   crown:{rx:22,ry:26, leaves:60}},
+      {x:60, h:36, op:.18, sw:'Center',trunk:{w:5,h:30},   crown:{rx:23,ry:28, leaves:65}}
     ];
 
     trees.forEach(function(t,ti){
@@ -738,17 +738,17 @@
     var NS='http://www.w3.org/2000/svg';
     var container=document.getElementById('vinesContainer');
     var vinePositions=[
-      {x:2,len:220,op:.2},{x:7,len:160,op:.15},{x:13,len:280,op:.25},
-      {x:18,len:130,op:.12},{x:22,len:180,op:.1},
-      {x:78,len:190,op:.1},{x:82,len:140,op:.12},{x:87,len:260,op:.25},
-      {x:93,len:170,op:.15},{x:98,len:230,op:.2},
-      {x:28,len:80,op:.05},{x:72,len:80,op:.05},
-      {x:35,len:60,op:.04},{x:65,len:60,op:.04},
-      {x:5,len:190,op:.18},{x:95,len:200,op:.18},
-      {x:10,len:140,op:.12},{x:90,len:150,op:.12},
-      {x:25,len:100,op:.07},{x:75,len:110,op:.07},
-      {x:40,len:70,op:.04},{x:60,len:65,op:.04},
-      {x:15,len:250,op:.2},{x:85,len:240,op:.2}
+      {x:2,len:220,op:.45},{x:7,len:160,op:.35},{x:13,len:280,op:.5},
+      {x:18,len:130,op:.3},{x:22,len:180,op:.25},
+      {x:78,len:190,op:.25},{x:82,len:140,op:.3},{x:87,len:260,op:.5},
+      {x:93,len:170,op:.35},{x:98,len:230,op:.45},
+      {x:28,len:80,op:.15},{x:72,len:80,op:.15},
+      {x:35,len:60,op:.12},{x:65,len:60,op:.12},
+      {x:5,len:190,op:.4},{x:95,len:200,op:.4},
+      {x:10,len:140,op:.3},{x:90,len:150,op:.3},
+      {x:25,len:100,op:.18},{x:75,len:110,op:.18},
+      {x:40,len:70,op:.1},{x:60,len:65,op:.1},
+      {x:15,len:250,op:.45},{x:85,len:240,op:.45}
     ];
     var vineGreens=['#1a3525','#1e3e2c','#224832','#183020','#1c3828'];
     vinePositions.forEach(function(v,vi){
