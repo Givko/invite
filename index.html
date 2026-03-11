@@ -1361,7 +1361,7 @@
   (function(){
     var c = document.getElementById('lavenderPetals');
     var petalColors = ['#B8ACE0','#D4CCF0','#9B8EC4','#EDE8FA'];
-    for(var i=0;i<85;i++){
+    for(var i=0;i<45;i++){
       var el = document.createElement('div');
       el.className = 'lavender-petal';
       var s = Math.random()*8+6;
@@ -1375,14 +1375,14 @@
   // ── Create fireflies ──
   (function(){
     var c = document.getElementById('fireflies');
-    for(var i=0;i<120;i++){
+    for(var i=0;i<85;i++){
       var el = document.createElement('div');
       el.className = 'firefly';
       var s = Math.random()*5+2;
       el.style.cssText = 'width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;top:'+(10+Math.random()*80)+'%;animation-duration:'+(Math.random()*6+3)+'s;animation-delay:'+(Math.random()*14)+'s;';
       c.appendChild(el);
     }
-    for(var i=0;i<80;i++){
+    for(var i=0;i<220;i++){
       var el = document.createElement('div');
       el.className = 'twinkle';
       var s = Math.random()*3+1;
