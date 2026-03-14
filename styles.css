@@ -64,6 +64,9 @@ a {
   overflow: hidden;
   pointer-events: none;
   background: linear-gradient(175deg, #0f2a1c 0%, var(--green-deep) 30%, var(--green) 60%, var(--lav-deep) 100%);
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .forest-backdrop::after {
@@ -71,7 +74,7 @@ a {
   position: absolute;
   inset: 0;
   background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
-  opacity: .4;
+  opacity: .15;
   pointer-events: none;
   z-index: 1;
 }
@@ -100,7 +103,7 @@ a {
   right: 0;
   height: 100%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 .tree {
@@ -141,12 +144,12 @@ a {
 /* ── Tent tables ── */
 .tents-container {
   position: absolute;
-  bottom: 5%;
+  bottom: 0;
   left: 0;
   right: 0;
-  height: 80%;
+  height: 35%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
 }
 
 .tent-group {
@@ -581,6 +584,18 @@ a {
   max-width: 480px;
 }
 
+.info-cards > a {
+  display: flex;
+  align-items: stretch;
+}
+
+.info-cards > a > .info-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 @media (max-width: 480px) {
   .info-cards { grid-template-columns: 1fr; }
 }
@@ -593,6 +608,10 @@ a {
   border: 1px solid rgba(184, 149, 63, .15);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   transition: transform .4s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease, border-color .3s;
 }
 
@@ -608,13 +627,13 @@ a {
 }
 
 .info-card-icon svg {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
 }
 
 .info-card-label {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--gold-pale);
@@ -625,10 +644,36 @@ a {
 
 .info-card-value {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 19px;
+  font-size: 20px;
   color: var(--gold);
   font-weight: 500;
   text-shadow: 0 1px 6px rgba(0, 0, 0, .4);
+}
+
+/* Clickable info cards (map links) */
+a > .info-card {
+  cursor: pointer;
+  border-color: rgba(184, 149, 63, .3);
+}
+
+a > .info-card::after {
+  content: '  Вижте на картата';
+  display: block;
+  margin-top: 12px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--gold-pale);
+  opacity: .5;
+  transition: opacity .3s;
+  text-align: center;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M24 42c-.5-.8-2.5-4-4.5-7.5-2-3.5-4-7-5.5-10-1.2-2.5-2-5-2-7.5 0-3 .8-5.5 2.5-7.5C16.5 7 19 5.5 22 5c1.5-.3 2.5-.2 4-.1 2 .2 4 1 5.5 2.2 2 1.5 3.5 3.5 4.2 6 .5 1.5.6 3 .3 4.8-.3 2-1 4-2.2 6.2-1.5 2.8-3.5 6.5-5.5 10C26.5 38 24.5 41.2 24 42z' stroke='%23D4C08A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='24' cy='18' r='5' stroke='%23D4C08A' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat center left;
+  background-size: 14px 14px;
+  background-position: calc(50% - 68px) center;
+}
+
+a > .info-card:hover::after {
+  opacity: 1;
 }
 
 /* ══════════════════════════════════════════
@@ -1048,4 +1093,70 @@ a {
 .footer-hearts {
   margin-bottom: 12px;
   opacity: .85;
+}
+
+/* ══════════════════════════════════════════
+   MOBILE ADJUSTMENTS
+   ══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Enlarge info cards */
+  .info-card {
+    padding: 32px 24px;
+  }
+
+  .info-card-icon svg {
+    width: 42px;
+    height: 42px;
+  }
+
+  .info-card-label {
+    font-size: 12px;
+    letter-spacing: 3.5px;
+  }
+
+  .info-card-value {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-card {
+    padding: 34px 26px;
+  }
+
+  .info-card-value {
+    font-size: 24px;
+  }
+}
+
+/* ── Mobile performance: reduce GPU cost ── */
+@media (max-width: 768px) {
+  .hero-date-box {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(15, 42, 28, .5);
+  }
+
+  .info-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(0, 0, 0, .3);
+  }
+
+  .form-container {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(10, 30, 20, .88);
+  }
+
+  .firefly,
+  .twinkle,
+  .particle {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  .light-rays {
+    display: none;
+  }
 }
