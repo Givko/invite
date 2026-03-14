@@ -232,35 +232,17 @@
       </button>
     </div>
 
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none"></iframe>
+
 
     <!-- ── RSVP Form ── -->
     <div class="form-container" id="rsvpFormContainer">
       <h3 class="form-title">Потвърждение</h3>
       <p class="form-subtitle">Ще се радваме да чуем от Вас</p>
 
-      <form action="https://formsubmit.co/milevjivko@gmail.com"
-            method="POST"
-            target="hidden_iframe"
-            onsubmit="return handleSubmit()">
+      <form onsubmit="return handleSubmit(event)">
 
-        <!-- Hidden fields for FormSubmit -->
-        <input type="hidden" name="_subject"  id="subjectField" value="Сватба RSVP">
-        <input type="hidden" name="_captcha"  value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_replyto"  value="noreply@wedding.com">
-        <input type="text"   name="_honey"    style="display:none" tabindex="-1">
-
-        <!-- Hidden fields populated by JS before submit -->
-        <input type="hidden" name="👤 Име"                   id="fldName"      value="">
-        <input type="hidden" name="📧 Имейл"                id="fldEmail"     value="">
-        <input type="hidden" name="✉️ Отговор"               id="fldAttending" value="">
-        <input type="hidden" name="👥 Брой гости"            id="fldGuests"    value="">
-        <input type="hidden" name="🍽️ Хранителни изисквания" id="fldDietary"   value="">
-        <input type="hidden" name="🏨 Хотелска стая"         id="fldHotel"     value="">
-        <input type="hidden" name="🚗 Транспорт"             id="fldTransport" value="">
-        <input type="hidden" name="👶 Деца"                  id="fldChildren"  value="">
-        <input type="hidden" name="💌 Послание"              id="fldMessage"   value="">
+        <!-- Honeypot for spam protection -->
+        <input type="text" name="_honey" style="display:none" tabindex="-1">
 
         <!-- Name & Email -->
         <div class="form-row">
@@ -365,9 +347,18 @@
         </div><!-- /.attending-fields -->
 
         <!-- Message -->
-        <div class="field" style="margin-bottom:32px">
+        <div class="field" style="margin-bottom:24px">
           <label>Послание за двойката</label>
           <textarea id="guestMessage" placeholder="Споделете пожеланията си..."></textarea>
+        </div>
+
+        <!-- Captcha -->
+        <div class="field" style="margin-bottom:32px">
+          <label id="captchaLabel">Защита от спам</label>
+          <p style="font-size:13px;color:var(--gold-pale);margin:0 0 8px;font-style:italic;opacity:.7">
+            Моля, решете задачката, за да потвърдим, че не сте робот
+          </p>
+          <input type="text" id="captchaAnswer" placeholder="Въведете отговора" autocomplete="off" required>
         </div>
 
         <div style="text-align:center">
