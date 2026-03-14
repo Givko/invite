@@ -34,39 +34,57 @@
     ];
 
     var vw = Math.max(320, window.innerWidth || 1024);
+    var isMobile = vw < 768;
 
     // Each tree: minW = minimum viewport width (px) to render.
     // Edge trees (x < 15 or x > 85) always show — they stick out past the sides.
     // Inner trees are progressively dropped on narrow screens.
     var trees = [
       // Left side — layered depth
-      { x: -5,  h: 95, op: .7,  sw: 'Left',   trunk: { w: 16, h: 75 }, crown: { rx: 80, ry: 95, leaves: 320 }, minW: 0    },
-      { x: 4,   h: 80, op: .8,  sw: 'Center', trunk: { w: 13, h: 65 }, crown: { rx: 65, ry: 80, leaves: 260 }, minW: 820  },
-      { x: 12,  h: 65, op: .55, sw: 'Right',  trunk: { w: 11, h: 55 }, crown: { rx: 52, ry: 62, leaves: 200 }, minW: 1100 },
-      { x: 20,  h: 50, op: .4,  sw: 'Left',   trunk: { w: 8,  h: 45 }, crown: { rx: 38, ry: 46, leaves: 130 }, minW: 1280 },
-      { x: -8,  h: 70, op: .5,  sw: 'Right',  trunk: { w: 10, h: 55 }, crown: { rx: 48, ry: 58, leaves: 180 }, minW: 640  },
+      { x: -5,  h: 110, op: .7,  sw: 'Left',   trunk: { w: 16, h: 120 }, crown: { rx: 80, ry: 95, leaves: 320 }, minW: 0    },
+      { x: 4,   h: 95,  op: .8,  sw: 'Center', trunk: { w: 13, h: 105 }, crown: { rx: 65, ry: 80, leaves: 260 }, minW: 820  },
+      { x: 12,  h: 78,  op: .55, sw: 'Right',  trunk: { w: 11, h: 90 },  crown: { rx: 52, ry: 62, leaves: 200 }, minW: 1100 },
+      { x: 20,  h: 62,  op: .4,  sw: 'Left',   trunk: { w: 8,  h: 75 },  crown: { rx: 38, ry: 46, leaves: 130 }, minW: 1280 },
+      { x: -8,  h: 85,  op: .5,  sw: 'Right',  trunk: { w: 10, h: 90 },  crown: { rx: 48, ry: 58, leaves: 180 }, minW: 640  },
 
       // Right side — layered depth
-      { x: 105, h: 98, op: .65, sw: 'Right',  trunk: { w: 16, h: 80 }, crown: { rx: 82, ry: 98, leaves: 340 }, minW: 0    },
-      { x: 92,  h: 78, op: .75, sw: 'Left',   trunk: { w: 13, h: 62 }, crown: { rx: 62, ry: 76, leaves: 250 }, minW: 820  },
-      { x: 84,  h: 62, op: .5,  sw: 'Center', trunk: { w: 10, h: 50 }, crown: { rx: 46, ry: 55, leaves: 170 }, minW: 1100 },
-      { x: 76,  h: 48, op: .35, sw: 'Right',  trunk: { w: 8,  h: 42 }, crown: { rx: 35, ry: 42, leaves: 120 }, minW: 1280 },
-      { x: 108, h: 72, op: .45, sw: 'Center', trunk: { w: 10, h: 52 }, crown: { rx: 50, ry: 60, leaves: 185 }, minW: 640  },
+      { x: 105, h: 115, op: .65, sw: 'Right',  trunk: { w: 16, h: 125 }, crown: { rx: 82, ry: 98, leaves: 340 }, minW: 0    },
+      { x: 92,  h: 92,  op: .75, sw: 'Left',   trunk: { w: 13, h: 100 }, crown: { rx: 62, ry: 76, leaves: 250 }, minW: 820  },
+      { x: 84,  h: 75,  op: .5,  sw: 'Center', trunk: { w: 10, h: 82 },  crown: { rx: 46, ry: 55, leaves: 170 }, minW: 1100 },
+      { x: 76,  h: 60,  op: .35, sw: 'Right',  trunk: { w: 8,  h: 72 },  crown: { rx: 35, ry: 42, leaves: 120 }, minW: 1280 },
+      { x: 108, h: 86,  op: .45, sw: 'Center', trunk: { w: 10, h: 86 },  crown: { rx: 50, ry: 60, leaves: 185 }, minW: 640  },
 
       // Extra depth trees
-      { x: -12, h: 60, op: .38, sw: 'Center', trunk: { w: 9,  h: 48 }, crown: { rx: 42, ry: 50, leaves: 150 }, minW: 640  },
-      { x: 112, h: 62, op: .38, sw: 'Left',   trunk: { w: 9,  h: 50 }, crown: { rx: 44, ry: 52, leaves: 155 }, minW: 640  },
-      { x: 26,  h: 55, op: .32, sw: 'Right',  trunk: { w: 8,  h: 42 }, crown: { rx: 36, ry: 44, leaves: 115 }, minW: 1280 },
-      { x: 72,  h: 52, op: .3,  sw: 'Left',   trunk: { w: 8,  h: 40 }, crown: { rx: 34, ry: 42, leaves: 110 }, minW: 1280 },
+      { x: -12, h: 74,  op: .38, sw: 'Center', trunk: { w: 9,  h: 78 },  crown: { rx: 42, ry: 50, leaves: 150 }, minW: 640  },
+      { x: 112, h: 76,  op: .38, sw: 'Left',   trunk: { w: 9,  h: 80 },  crown: { rx: 44, ry: 52, leaves: 155 }, minW: 640  },
+      { x: 26,  h: 68,  op: .32, sw: 'Right',  trunk: { w: 8,  h: 72 },  crown: { rx: 36, ry: 44, leaves: 115 }, minW: 1280 },
+      { x: 72,  h: 65,  op: .3,  sw: 'Left',   trunk: { w: 8,  h: 68 },  crown: { rx: 34, ry: 42, leaves: 110 }, minW: 1280 },
 
       // Background mid trees (behind content)
-      { x: 30,  h: 45, op: .25, sw: 'Left',   trunk: { w: 7,  h: 38 }, crown: { rx: 30, ry: 36, leaves: 90  }, minW: 1400 },
-      { x: 42,  h: 40, op: .22, sw: 'Right',  trunk: { w: 6,  h: 34 }, crown: { rx: 26, ry: 32, leaves: 75  }, minW: 1600 },
-      { x: 55,  h: 42, op: .23, sw: 'Center', trunk: { w: 6,  h: 36 }, crown: { rx: 28, ry: 34, leaves: 80  }, minW: 1600 },
-      { x: 68,  h: 38, op: .22, sw: 'Left',   trunk: { w: 6,  h: 32 }, crown: { rx: 24, ry: 30, leaves: 70  }, minW: 1400 },
-      { x: 38,  h: 35, op: .18, sw: 'Right',  trunk: { w: 5,  h: 28 }, crown: { rx: 22, ry: 26, leaves: 60  }, minW: 1800 },
-      { x: 60,  h: 36, op: .18, sw: 'Center', trunk: { w: 5,  h: 30 }, crown: { rx: 23, ry: 28, leaves: 65  }, minW: 1800 }
+      { x: 30,  h: 55,  op: .25, sw: 'Left',   trunk: { w: 7,  h: 62 },  crown: { rx: 30, ry: 36, leaves: 90  }, minW: 1400 },
+      { x: 42,  h: 50,  op: .22, sw: 'Right',  trunk: { w: 6,  h: 56 },  crown: { rx: 26, ry: 32, leaves: 75  }, minW: 1600 },
+      { x: 55,  h: 52,  op: .23, sw: 'Center', trunk: { w: 6,  h: 58 },  crown: { rx: 28, ry: 34, leaves: 80  }, minW: 1600 },
+      { x: 68,  h: 48,  op: .22, sw: 'Left',   trunk: { w: 6,  h: 54 },  crown: { rx: 24, ry: 30, leaves: 70  }, minW: 1400 },
+      { x: 38,  h: 44,  op: .18, sw: 'Right',  trunk: { w: 5,  h: 48 },  crown: { rx: 22, ry: 26, leaves: 60  }, minW: 1800 },
+      { x: 60,  h: 45,  op: .18, sw: 'Center', trunk: { w: 5,  h: 50 },  crown: { rx: 23, ry: 28, leaves: 65  }, minW: 1800 }
     ];
+
+    // On mobile, push trees further to the edges and make them smaller
+    if (isMobile) {
+      trees.forEach(function (t) {
+        if (t.x <= 50) {
+          t.x = t.x - 12;           // push left trees further left
+        } else {
+          t.x = t.x + 12;           // push right trees further right
+        }
+        t.h = Math.round(t.h * 0.7); // shorter trees on mobile but still tall
+        t.crown.rx = Math.round(t.crown.rx * 0.65);
+        t.crown.ry = Math.round(t.crown.ry * 0.65);
+        t.crown.leaves = Math.round(t.crown.leaves * 0.5);
+        t.trunk.w = Math.round(t.trunk.w * 0.7);
+        t.trunk.h = Math.round(t.trunk.h * 0.65);
+      });
+    }
 
     trees.forEach(function (t, ti) {
       if (vw < t.minW) return;
@@ -314,11 +332,12 @@
     var vw = Math.max(320, window.innerWidth || 1024);
 
     // minW = minimum viewport to render. Outer tents always show; inner pair needs 820+.
+    var isMobileTent = vw < 768;
     var tents = [
-      { x: 15, w: 22, h: 50, op: .7,  minW: 0   },
-      { x: 35, w: 18, h: 42, op: .55, minW: 820 },
-      { x: 52, w: 18, h: 42, op: .55, minW: 820 },
-      { x: 68, w: 22, h: 50, op: .7,  minW: 0   }
+      { x: isMobileTent ? 5 : 2,   w: isMobileTent ? 50 : 42, h: isMobileTent ? 100 : 90, op: isMobileTent ? .85 : .8, minW: 0   },
+      { x: 20, w: 38, h: 80, op: .65, minW: 820 },
+      { x: 50, w: 38, h: 80, op: .65, minW: 820 },
+      { x: isMobileTent ? 50 : 60, w: isMobileTent ? 50 : 42, h: isMobileTent ? 100 : 90, op: isMobileTent ? .85 : .8, minW: 0   }
     ];
 
     tents.forEach(function (t) {
@@ -715,62 +734,80 @@
     }
   }
 
+  // Captcha — simple math question
+  var captchaA = Math.floor(Math.random() * 9) + 1;
+  var captchaB = Math.floor(Math.random() * 9) + 1;
+  var captchaSum = captchaA + captchaB;
+  document.getElementById('captchaLabel').textContent = 'Колко е ' + captchaA + ' + ' + captchaB + '? *';
+
   function updateBtn() {
     var name = document.getElementById('guestName').value.trim();
-    document.getElementById('submitBtn').disabled = !(name && attending);
+    var captchaOk = document.getElementById('captchaAnswer').value.trim() === String(captchaSum);
+    document.getElementById('submitBtn').disabled = !(name && attending && captchaOk);
   }
 
   document.getElementById('guestName').addEventListener('input', updateBtn);
+  document.getElementById('captchaAnswer').addEventListener('input', updateBtn);
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    if (e) e.preventDefault();
+
     var name = document.getElementById('guestName').value.trim();
     if (!name || !attending) return false;
+
+    // Verify captcha
+    if (document.getElementById('captchaAnswer').value.trim() !== String(captchaSum)) {
+      alert('Грешен отговор на задачата. Моля, опитайте отново.');
+      return false;
+    }
 
     var email       = document.getElementById('guestEmail').value || 'Не е посочен';
     var isAttending = attending === 'С радост приемам';
 
-    // Populate hidden fields
-    document.getElementById('fldName').value      = name;
-    document.getElementById('fldEmail').value     = email;
-    document.getElementById('fldAttending').value = isAttending
-      ? '✅ С радост приемам'
-      : '❌ За съжаление не мога';
+    // Build form data for AJAX submission
+    var emoji = isAttending ? '✅' : '❌';
+    var ge = document.getElementById('guestEmail').value.trim();
+
+    var data = {
+      '_subject':  emoji + ' Сватба RSVP — ' + name + ' — ' + attending,
+      '_captcha':  'false',
+      '_template': 'table',
+      '_replyto':  (ge && ge !== 'milevjivko@gmail.com') ? ge : 'noreply@wedding.com',
+      '👤 Име':                   name,
+      '📧 Имейл':                email,
+      '✉️ Отговор':               isAttending ? '✅ С радост приемам' : '❌ За съжаление не мога'
+    };
 
     if (isAttending) {
-      document.getElementById('fldGuests').value    = document.getElementById('guestCount').value + ' гост(и)';
-      document.getElementById('fldDietary').value   = document.getElementById('dietary').value || 'Няма';
-      document.getElementById('fldHotel').value     = checks.hotel     ? 'Да — 1 нощ (29 юни)' : 'Не';
-      document.getElementById('fldTransport').value = checks.transport ? 'Да' : 'Не';
-      document.getElementById('fldChildren').value  = checks.children
+      data['👥 Брой гости']            = document.getElementById('guestCount').value + ' гост(и)';
+      data['🍽️ Хранителни изисквания'] = document.getElementById('dietary').value || 'Няма';
+      data['🏨 Хотелска стая']         = checks.hotel     ? 'Да — 1 нощ (29 юни)' : 'Не';
+      data['🚗 Транспорт']             = checks.transport ? 'Да' : 'Не';
+      data['👶 Деца']                  = checks.children
         ? 'Да — ' + document.getElementById('childrenCountSelect').value + ' дете(а)'
         : 'Не';
-    } else {
-      document.getElementById('fldGuests').disabled    = true;
-      document.getElementById('fldDietary').disabled   = true;
-      document.getElementById('fldHotel').disabled     = true;
-      document.getElementById('fldTransport').disabled = true;
-      document.getElementById('fldChildren').disabled  = true;
     }
 
     var msg = document.getElementById('guestMessage').value;
     if (msg) {
-      document.getElementById('fldMessage').value = msg;
-    } else {
-      document.getElementById('fldMessage').disabled = true;
+      data['💌 Послание'] = msg;
     }
 
-    // Subject line with emoji
-    var emoji = isAttending ? '✅' : '❌';
-    document.getElementById('subjectField').value = emoji + ' Сватба RSVP — ' + name + ' — ' + attending;
+    // Disable button to prevent double submit
+    document.getElementById('submitBtn').disabled = true;
 
-    // Reply-to
-    var ge = document.getElementById('guestEmail').value.trim();
-    if (ge && ge !== 'milevjivko@gmail.com') {
-      document.querySelector('input[name="_replyto"]').value = ge;
-    }
-
-    // Show success message
-    setTimeout(function () {
+    // Send via AJAX — works reliably in Viber/Messenger in-app browsers
+    fetch('https://formsubmit.co/ajax/milevjivko@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (result) {
+      // Show success message
       document.getElementById('rsvpFormContainer').style.display = 'none';
 
       var s = document.getElementById('successMsg');
@@ -781,9 +818,13 @@
         : 'Ще ни липсвате. Благодарим, че ни уведомихте.';
 
       s.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 300);
+    })
+    .catch(function (err) {
+      document.getElementById('submitBtn').disabled = false;
+      alert('Възникна грешка при изпращането. Моля, опитайте отново.');
+    });
 
-    return true;
+    return false;
   }
 
 })();
