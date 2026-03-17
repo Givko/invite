@@ -1245,7 +1245,7 @@ a > .info-card:hover::after {
 .ds-icon svg { width:100%; height:100%; }
 .ds-title {
   font-family:'Cormorant Garamond',serif;
-  font-size:19px; font-weight:500;
+  font-size:21px; font-weight:500;
   color:var(--gold-pale); letter-spacing:.03em;
 }
 
@@ -1254,14 +1254,14 @@ a > .info-card:hover::after {
 .info-row { display:flex; gap:14px; align-items:baseline; }
 .info-row-label {
   font-family:'Nunito Sans',sans-serif;
-  font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  font-size:12px; letter-spacing:.14em; text-transform:uppercase;
   color:var(--gold); opacity:.6;
   white-space:nowrap; min-width:110px;
   padding-top:2px;
 }
 .info-row-value {
   font-family:'Cormorant Garamond',serif;
-  font-size:16px; font-weight:400;
+  font-size:18px; font-weight:400;
   color:var(--gold-pale); line-height:1.55;
 }
 .info-row-value a {
@@ -1299,11 +1299,11 @@ a > .info-card:hover::after {
 .tl-item { display:flex; gap:16px; position:relative; }
 .tl-left {
   display:flex; flex-direction:column; align-items:center;
-  width:48px; flex-shrink:0;
+  width:60px; flex-shrink:0;
 }
 .tl-time {
   font-family:'Cormorant Garamond',serif;
-  font-size:14px; font-weight:500;
+  font-size:16px; font-weight:500;
   color:var(--gold); white-space:nowrap;
   padding-top:2px;
 }
@@ -1314,19 +1314,19 @@ a > .info-card:hover::after {
 }
 .tl-item:last-child .tl-line { display:none; }
 .tl-dot {
-  position:absolute; left:38px; top:6px;
+  position:absolute; left:52px; top:6px;
   width:8px; height:8px; border-radius:50%;
   background:var(--gold); opacity:.55;
 }
 .tl-content { padding:2px 0 20px 8px; }
 .tl-event {
   font-family:'Cormorant Garamond',serif;
-  font-size:16px; font-weight:500;
+  font-size:18px; font-weight:500;
   color:var(--gold-pale);
 }
 .tl-desc {
   font-family:'Nunito Sans',sans-serif;
-  font-size:12.5px; color:rgba(232,213,168,.5);
+  font-size:14px; color:rgba(232,213,168,.5);
   margin-top:3px; line-height:1.5;
 }
 
