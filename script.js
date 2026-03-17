@@ -681,8 +681,33 @@
   var attending = '';
   var checks    = { hotel: false, transport: false, children: false };
 
+  /* ══════════════════════════════════════════
+     MORE DETAILS MODAL
+     ══════════════════════════════════════════ */
+  function openDetailsModal() {
+    var o = document.getElementById('detailsModal');
+    o.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { o.querySelector('.modal-close').focus(); }, 350);
+  }
+
+  function closeDetailsModal() {
+    document.getElementById('detailsModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('detailsModal').addEventListener('click', function (e) {
+    if (e.target === this) closeDetailsModal();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDetailsModal();
+  });
+
   // Expose functions globally for onclick handlers
-  window.openForm        = openForm;
+  window.openDetailsModal  = openDetailsModal;
+  window.closeDetailsModal = closeDetailsModal;
+  window.openForm          = openForm;
   window.selectAttending = selectAttending;
   window.toggleCheck     = toggleCheck;
   window.handleSubmit    = handleSubmit;
