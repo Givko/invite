@@ -23,6 +23,12 @@
   --gold-pale: #D4C08A;
   --charcoal: #1E1E1E;
   --text: #2D2D2D;
+
+  /* Modal */
+  --radius-card:  18px;
+  --card-bg:      rgba(10,30,20,.55);
+  --card-border:  rgba(201,169,110,.22);
+  --T:            .35s cubic-bezier(.4,0,.2,1);
 }
 
 /* ══════════════════════════════════════════
