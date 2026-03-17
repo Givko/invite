@@ -238,6 +238,19 @@
         <div class="info-card-value">Официален</div>
       </div>
 
+      <div class="info-card info-card-more reveal reveal-d6"
+          role="button" tabindex="0"
+          onclick="openDetailsModal()"
+          onkeydown="if(event.key==='Enter'||event.key===' ')openDetailsModal()">
+        <div class="more-icon">
+          <svg viewBox="0 0 22 22" fill="none" stroke="var(--gold)" stroke-width="1.7" stroke-linecap="round">
+            <line x1="11" y1="4" x2="11" y2="18"/>
+            <line x1="4"  y1="11" x2="18" y2="11"/>
+          </svg>
+        </div>
+        <div class="info-card-label">Допълнително</div>
+        <div class="info-card-value">Повече детайли</div>
+      </div>
     </div><!-- /.info-cards -->
   </div><!-- /.details-inner -->
 </section>
@@ -425,6 +438,250 @@
 <!-- ═══════════════════════════════════════════════════════
      JAVASCRIPT
      ═══════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════
+     MORE DETAILS MODAL
+     ═══════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="detailsModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
+  <div class="modal-panel">
+
+    <button class="modal-close" onclick="closeDetailsModal()" aria-label="Затвори">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"
+           stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="1" y1="1" x2="12" y2="12"/>
+        <line x1="12" y1="1" x2="1" y2="12"/>
+      </svg>
+    </button>
+
+    <div class="modal-header">
+      <p class="modal-eyebrow">29 юни 2026 · Естера Вини</p>
+      <h2 class="modal-title" id="modalHeading">Всичко, което<br>трябва да знаете</h2>
+      <div class="modal-rule">
+        <div class="modal-rule-line"></div>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--gold)" opacity=".55">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+        <div class="modal-rule-line"></div>
+      </div>
+    </div>
+
+    <div class="detail-sections">
+
+      <!-- Програма -->
+      <div class="detail-section">
+        <div class="ds-header">
+          <div class="ds-icon">
+            <svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="3" width="22" height="24" rx="3"/>
+              <line x1="9" y1="10" x2="21" y2="10"/>
+              <line x1="9" y1="15" x2="21" y2="15"/>
+              <line x1="9" y1="20" x2="16" y2="20"/>
+            </svg>
+          </div>
+          <div class="ds-title">Програма на деня</div>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-left"><span class="tl-time">17:00</span><div class="tl-line"></div></div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <div class="tl-event">Гражданска церемония</div>
+              <div class="tl-desc">"Червената Църква", София — Моля пристигнете 15 минути по-рано</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><span class="tl-time">19:00</span><div class="tl-line"></div></div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <div class="tl-event">Пристигане в Естера Вини</div>
+              <div class="tl-desc">Коктейл на открито сред лозята</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><span class="tl-time">19:30</span><div class="tl-line"></div></div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <div class="tl-event">Официална церемония</div>
+              <div class="tl-desc">Естера Вини — сред зелените лози</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-left"><span class="tl-time">20:30</span><div class="tl-line"></div></div>
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <div class="tl-event">Вечеря &amp; танци</div>
+              <div class="tl-desc">Вечерта продължава до зори</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Нощувки -->
+      <div class="detail-section">
+        <div class="ds-header">
+          <div class="ds-icon">
+            <svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 27V13l12-9 12 9v14"/>
+              <rect x="11" y="19" width="8" height="8"/>
+              <path d="M3 13h24"/>
+            </svg>
+          </div>
+          <div class="ds-title">Нощувки</div>
+        </div>
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="info-row-label">Хотел</span>
+            <span class="info-row-value"><!-- Попълнете название --></span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Адрес</span>
+            <span class="info-row-value">
+              <a href="https://maps.app.goo.gl/" target="_blank" rel="noopener">Виж на картата →</a>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Нощувка</span>
+            <span class="info-row-value"><!-- напр. 80 лв / стая --></span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Краен срок</span>
+            <span class="info-row-value"><!-- напр. 1 юни 2026 --></span>
+          </div>
+        </div>
+        <p class="info-note"><!-- Допълнителна бележка, специален код и т.н. --></p>
+      </div>
+
+      <!-- Транспорт -->
+      <div class="detail-section">
+        <div class="ds-header">
+          <div class="ds-icon">
+            <svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="10" width="26" height="13" rx="3"/>
+              <path d="M2 16h26"/>
+              <circle cx="8"  cy="23" r="2.5"/>
+              <circle cx="22" cy="23" r="2.5"/>
+              <path d="M6.5 10l3-5h11l3 5"/>
+            </svg>
+          </div>
+          <div class="ds-title">Транспорт</div>
+        </div>
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="info-row-label">Тръгване от</span>
+            <span class="info-row-value"><!-- напр. пл. Народно събрание, 15:30 --></span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Връщане</span>
+            <span class="info-row-value"><!-- напр. след полунощ --></span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Паркинг</span>
+            <span class="info-row-value"><!-- Наличен на място / улично --></span>
+          </div>
+        </div>
+        <p class="info-note"><!-- Бележка за транспорта --></p>
+      </div>
+
+      <!-- Дрескод -->
+      <div class="detail-section">
+        <div class="ds-header">
+          <div class="ds-icon">
+            <svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 6c1 .5 3 .8 6 .8s5-.3 6-.8"/>
+              <path d="M9 6C7 8 6 10 6 13c0 1.5.5 3 1.2 4.3"/>
+              <path d="M21 6c2 2 3 4 3 7 0 1.5-.5 3-1.2 4.3"/>
+              <path d="M8 17L4 27h22l-4-9.7"/>
+              <line x1="15" y1="6.8" x2="15" y2="12"/>
+            </svg>
+          </div>
+          <div class="ds-title">Дрескод</div>
+        </div>
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="info-row-label">Стил</span>
+            <span class="info-row-value">Официален</span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Цветова гама</span>
+            <span class="info-row-value">
+              <div class="swatches">
+                <span class="swatch"><span class="swatch-dot" style="background:#B8ACE0"></span>Лавандула</span>
+                <span class="swatch"><span class="swatch-dot" style="background:#E8D5A8"></span>Шампанско</span>
+                <span class="swatch"><span class="swatch-dot" style="background:#4a7c5f"></span>Маслина</span>
+                <span class="swatch"><span class="swatch-dot" style="background:#f5f0e8"></span>Крем</span>
+              </div>
+            </span>
+          </div>
+        </div>
+        <p class="info-note">Молим да избягвате бяло и тъмносиньо. Тържеството се провежда на открито — препоръчваме стабилни токчета или елегантни равни обувки.</p>
+      </div>
+
+      <!-- Подаръци -->
+      <div class="detail-section">
+        <div class="ds-header">
+          <div class="ds-icon">
+            <svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="12" width="24" height="14" rx="2"/>
+              <path d="M3 17h24"/>
+              <line x1="15" y1="12" x2="15" y2="26"/>
+              <path d="M15 12c0 0-4-5-7-3s-1 6 7 3z"/>
+              <path d="M15 12c0 0 4-5 7-3s1 6-7 3z"/>
+            </svg>
+          </div>
+          <div class="ds-title">Подаръци</div>
+        </div>
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="info-row-label">Пожелание</span>
+            <span class="info-row-value"><!-- Вашето присъствие е най-добрият подарък --></span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">IBAN</span>
+            <span class="info-row-value"><!-- BG00 XXXX 0000 0000 0000 00 --></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- За контакт -->
+      <div class="detail-section">
+        <div class="ds-header">
+          <div class="ds-icon">
+            <svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 8h22a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V10a2 2 0 012-2z"/>
+              <polyline points="2 9 15 17 28 9"/>
+            </svg>
+          </div>
+          <div class="ds-title">За контакт</div>
+        </div>
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="info-row-label">Телефон</span>
+            <span class="info-row-value"><a href="tel:+359880000000">+359 88 000 0000</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Имейл</span>
+            <span class="info-row-value"><a href="mailto:zhivko.katerina@example.com">zhivko.katerina@example.com</a></span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Хаштаг</span>
+            <span class="info-row-value">#ЖивкоИКатерина2026</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.detail-sections -->
+
+    <div class="modal-closing">
+      <div class="modal-closing-hearts">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--gold)">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+      <p>Нямате отговор на въпроса си?<br>Свържете се с нас — с удоволствие ще помогнем.</p>
+    </div>
+
+  </div><!-- /.modal-panel -->
+</div><!-- /.modal-overlay -->
+
 <script src="script.js"></script>
 </body>
 </html>
