@@ -797,7 +797,7 @@
       '_subject':  emoji + ' Сватба RSVP — ' + name + ' — ' + attending,
       '_captcha':  'false',
       '_template': 'table',
-      '_replyto':  (ge && ge !== 'milevjivko@gmail.com') ? ge : 'noreply@wedding.com',
+      '_replyto':  (ge && ge !== 'zhivko.katerina.wedding@gmail.com') ? ge : 'noreply@wedding.com',
       '👤 Име':                   name,
       '📧 Имейл':                email,
       '✉️ Отговор':               isAttending ? '✅ С радост приемам' : '❌ За съжаление не мога'
@@ -822,7 +822,7 @@
     document.getElementById('submitBtn').disabled = true;
 
     // Send via AJAX — works reliably in Viber/Messenger in-app browsers
-    fetch('https://formsubmit.co/ajax/milevjivko@gmail.com', {
+    fetch('https://formsubmit.co/ajax/zhivko.katerina.wedding@gmail.com', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
