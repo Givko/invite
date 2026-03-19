@@ -852,4 +852,45 @@
     return false;
   }
 
+  /* ══════════════════════════════════════════
+     BACKGROUND MUSIC
+     ══════════════════════════════════════════ */
+  var music = document.getElementById('bgMusic');
+  var toggleBtn = document.getElementById('musicToggle');
+  var iconOn = document.getElementById('musicIconOn');
+  var iconOff = document.getElementById('musicIconOff');
+  var musicStarted = false;
+
+  function startMusic() {
+    if (musicStarted) return;
+    music.volume = 0.4;
+    music.play().then(function () {
+      musicStarted = true;
+      iconOn.style.display = '';
+      iconOff.style.display = 'none';
+    }).catch(function () {});
+  }
+
+  // Start music on first user interaction
+  document.addEventListener('click', startMusic, { once: true });
+  document.addEventListener('touchstart', startMusic, { once: true });
+  document.addEventListener('scroll', startMusic, { once: true });
+
+  toggleBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (!musicStarted) {
+      startMusic();
+      return;
+    }
+    if (music.paused) {
+      music.play();
+      iconOn.style.display = '';
+      iconOff.style.display = 'none';
+    } else {
+      music.pause();
+      iconOn.style.display = 'none';
+      iconOff.style.display = '';
+    }
+  });
+
 })();

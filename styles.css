@@ -1210,12 +1210,12 @@ a > .info-card:hover::after {
 .modal-header { text-align:center; margin-bottom:38px; }
 .modal-eyebrow {
   font-family:'Nunito Sans',sans-serif;
-  font-size:10px; letter-spacing:.22em; text-transform:uppercase;
-  color:var(--gold); opacity:.65; margin-bottom:10px;
+  font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--gold); opacity:.65; margin-bottom:12px;
 }
 .modal-title {
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(28px,5vw,36px); font-weight:400;
+  font-size:clamp(32px,5.5vw,42px); font-weight:400;
   color:var(--gold-pale); line-height:1.1;
 }
 .modal-rule {
@@ -1230,13 +1230,13 @@ a > .info-card:hover::after {
   background:linear-gradient(270deg,transparent,rgba(201,169,110,.32));
 }
 
-.detail-sections { display:flex; flex-direction:column; gap:22px; }
+.detail-sections { display:flex; flex-direction:column; gap:26px; }
 
 .detail-section {
   background:rgba(201,169,110,.04);
   border:1px solid rgba(201,169,110,.11);
   border-radius:16px;
-  padding:24px 26px;
+  padding:28px 30px;
   transition:border-color var(--T);
 }
 .detail-section:hover { border-color:rgba(201,169,110,.2); }
@@ -1247,11 +1247,11 @@ a > .info-card:hover::after {
   padding-bottom:14px;
   border-bottom:1px solid rgba(201,169,110,.09);
 }
-.ds-icon { width:30px; height:30px; flex-shrink:0; opacity:.85; }
+.ds-icon { width:34px; height:34px; flex-shrink:0; opacity:.85; }
 .ds-icon svg { width:100%; height:100%; }
 .ds-title {
   font-family:'Cormorant Garamond',serif;
-  font-size:21px; font-weight:500;
+  font-size:24px; font-weight:500;
   color:var(--gold-pale); letter-spacing:.03em;
 }
 
@@ -1260,14 +1260,14 @@ a > .info-card:hover::after {
 .info-row { display:flex; gap:14px; align-items:baseline; }
 .info-row-label {
   font-family:'Nunito Sans',sans-serif;
-  font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+  font-size:13px; letter-spacing:.14em; text-transform:uppercase;
   color:var(--gold); opacity:.6;
   white-space:nowrap; min-width:110px;
   padding-top:2px;
 }
 .info-row-value {
   font-family:'Cormorant Garamond',serif;
-  font-size:18px; font-weight:400;
+  font-size:20px; font-weight:400;
   color:var(--gold-pale); line-height:1.55;
 }
 .info-row-value a {
@@ -1283,9 +1283,9 @@ a > .info-card:hover::after {
 
 .info-note {
   font-family:'Cormorant Garamond',serif;
-  font-size:14px; font-style:italic;
+  font-size:16px; font-style:italic;
   color:rgba(232,213,168,.45);
-  margin-top:10px;
+  margin-top:12px;
   line-height:1.6;
 }
 
@@ -1309,7 +1309,7 @@ a > .info-card:hover::after {
 }
 .tl-time {
   font-family:'Cormorant Garamond',serif;
-  font-size:16px; font-weight:500;
+  font-size:18px; font-weight:500;
   color:var(--gold); white-space:nowrap;
   padding-top:2px;
 }
@@ -1327,13 +1327,23 @@ a > .info-card:hover::after {
 .tl-content { padding:2px 0 20px 8px; }
 .tl-event {
   font-family:'Cormorant Garamond',serif;
-  font-size:18px; font-weight:500;
+  font-size:20px; font-weight:500;
   color:var(--gold-pale);
 }
 .tl-desc {
   font-family:'Nunito Sans',sans-serif;
-  font-size:14px; color:rgba(232,213,168,.5);
-  margin-top:3px; line-height:1.5;
+  font-size:15px; color:rgba(232,213,168,.5);
+  margin-top:4px; line-height:1.5;
+}
+.tl-desc a {
+  color:var(--gold);
+  text-decoration:none;
+  border-bottom:1px solid rgba(201,169,110,.3);
+  transition:border-color var(--T), color var(--T);
+}
+.tl-desc a:hover {
+  color:#fff;
+  border-color:rgba(255,255,255,.5);
 }
 
 .modal-closing {
@@ -1343,11 +1353,28 @@ a > .info-card:hover::after {
 }
 .modal-closing p {
   font-family:'Cormorant Garamond',serif;
-  font-size:15px; font-style:italic;
+  font-size:17px; font-style:italic;
   color:rgba(232,213,168,.4);
   line-height:1.7;
 }
 .modal-closing-hearts { margin-bottom:10px; opacity:.4; }
+
+/* ── Music toggle ── */
+.music-toggle {
+  position:fixed; bottom:24px; right:24px; z-index:9999;
+  width:44px; height:44px; border-radius:50%;
+  background:rgba(10,30,20,.7);
+  border:1px solid rgba(201,169,110,.3);
+  color:var(--gold);
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  backdrop-filter:blur(8px);
+  transition:background .3s, border-color .3s;
+}
+.music-toggle:hover {
+  background:rgba(10,30,20,.9);
+  border-color:var(--gold);
+}
 
 /* ══════════════════════════════════════════
    MOBILE ADJUSTMENTS
