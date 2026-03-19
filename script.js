@@ -894,4 +894,38 @@
     }
   });
 
+  /* ══════════════════════════════════════════
+     SCROLL-DRIVEN BACKGROUND GRADIENT
+     ══════════════════════════════════════════ */
+  (function () {
+    var root = document.documentElement;
+    // Start state — original colour
+    var start = { r: 107, g: 91,  b: 138 }; // #6B5B8A
+    // End state — deep rich lavender
+    var end   = { r: 45,  g: 25,  b: 95  }; // #2D195F
+
+    function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+    function toHex(r, g, b) {
+      return '#' + [r, g, b].map(function (v) {
+        return v.toString(16).padStart(2, '0');
+      }).join('');
+    }
+
+    function updateGradient() {
+      var maxScroll = document.body.scrollHeight - window.innerHeight;
+      var t = maxScroll > 0 ? Math.min(1, window.scrollY / maxScroll) : 0;
+      // accelerate early so change is visible quickly
+      t = Math.pow(t, 0.5);
+
+      root.style.setProperty('--lav-deep', toHex(
+        lerp(start.r, end.r, t),
+        lerp(start.g, end.g, t),
+        lerp(start.b, end.b, t)
+      ));
+    }
+
+    window.addEventListener('scroll', updateGradient, { passive: true });
+    updateGradient();
+  }());
+
 })();
