@@ -902,7 +902,7 @@
     // Start state — original colour
     var start = { r: 107, g: 91,  b: 138 }; // #6B5B8A
     // End state — deep rich lavender
-    var end   = { r: 45,  g: 25,  b: 95  }; // #2D195F
+    var end   = { r: 75,  g: 28,  b: 108 }; // #4B1C6C
 
     function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
     function toHex(r, g, b) {
