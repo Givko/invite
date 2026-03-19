@@ -786,31 +786,27 @@
       return false;
     }
 
-    var email       = document.getElementById('guestEmail').value || 'Не е посочен';
     var isAttending = attending === 'С радост приемам';
 
     // Build form data for AJAX submission
     var emoji = isAttending ? '✅' : '❌';
-    var ge = document.getElementById('guestEmail').value.trim();
 
     var data = {
       '_subject':  emoji + ' Сватба RSVP — ' + name + ' — ' + attending,
       '_captcha':  'false',
       '_template': 'table',
-      '_replyto':  (ge && ge !== 'zhivko.katerina.wedding@gmail.com') ? ge : 'noreply@wedding.com',
+      '_replyto':  'noreply@wedding.com',
       '👤 Име':                   name,
-      '📧 Имейл':                email,
       '✉️ Отговор':               isAttending ? '✅ С радост приемам' : '❌ За съжаление не мога'
     };
 
     if (isAttending) {
       data['👥 Брой гости']            = document.getElementById('guestCount').value + ' гост(и)';
-      var dietChoices = [];
-      if (document.getElementById('dietVegetarian').checked) dietChoices.push('Вегетарианец');
-      if (document.getElementById('dietNone').checked) dietChoices.push('Без изисквания');
-      var dietText = document.getElementById('dietary').value;
-      if (dietText) dietChoices.push(dietText);
-      data['🍽️ Хранителни изисквания'] = dietChoices.length ? dietChoices.join(', ') : 'Няма';
+      var dietChoice = document.querySelector('input[name="dietaryChoice"]:checked');
+      var dietValue = dietChoice ? dietChoice.value : 'Без';
+      var allergies = document.getElementById('dietary').value;
+      data['🍽️ Хранителни изисквания'] = dietValue === 'Без' ? 'Без изисквания' : dietValue;
+      data['🤧 Алергии'] = allergies || 'Няма';
       data['🏨 Хотелска стая']         = checks.hotel     ? 'Да — 1 нощ (29 юни)' : 'Не';
       data['🚗 Транспорт']             = checks.transport ? 'Да' : 'Не';
       data['👶 Деца']                  = checks.children

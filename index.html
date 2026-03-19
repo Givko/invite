@@ -162,15 +162,11 @@
         <!-- Honeypot for spam protection -->
         <input type="text" name="_honey" style="display:none" tabindex="-1">
 
-        <!-- Name & Email -->
+        <!-- Name -->
         <div class="form-row">
           <div class="field">
             <label>Вашето име *</label>
             <input type="text" id="guestName" placeholder="Име и фамилия" required>
-          </div>
-          <div class="field">
-            <label>Имейл</label>
-            <input type="text" id="guestEmail" placeholder="вашият@email.com" autocomplete="email">
           </div>
         </div>
 
@@ -206,13 +202,14 @@
               <label>Хранителни изисквания</label>
               <div class="dietary-options">
                 <label class="dietary-option">
-                  <input type="checkbox" id="dietVegetarian" value="Вегетарианец"> Вегетарианец
+                  <input type="radio" name="dietaryChoice" value="Без" checked> Без изисквания
                 </label>
                 <label class="dietary-option">
-                  <input type="checkbox" id="dietNone" value="Без"> Без изисквания
+                  <input type="radio" name="dietaryChoice" value="Вегетарианец"> Вегетарианец
                 </label>
               </div>
-              <input type="text" id="dietary" placeholder="Алергии или други изисквания...">
+              <label class="dietary-allergy-label">Алергии</label>
+              <input type="text" id="dietary" placeholder="Моля, опишете вашите алергии...">
             </div>
           </div>
 
@@ -472,33 +469,6 @@
             </svg>
           </div>
           <div class="ds-title">Дрескод — Официален</div>
-        </div>
-      </div>
-
-      <!-- За контакт -->
-      <div class="detail-section">
-        <div class="ds-header">
-          <div class="ds-icon">
-            <svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 8h22a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V10a2 2 0 012-2z"/>
-              <polyline points="2 9 15 17 28 9"/>
-            </svg>
-          </div>
-          <div class="ds-title">За контакт</div>
-        </div>
-        <div class="info-rows">
-          <div class="info-row">
-            <span class="info-row-label">Телефон</span>
-            <span class="info-row-value"><a href="tel:+359884704822">+359 88 470 4822</a> или <a href="tel:+359899913875">+359 89 991 3875</a></span>
-          </div>
-          <div class="info-row">
-            <span class="info-row-label">Имейл</span>
-            <span class="info-row-value"><a href="mailto:zhivko.katerina.wedding@gmail.com">zhivko.katerina.wedding@gmail.com</a></span>
-          </div>
-          <div class="info-row">
-            <span class="info-row-label">Хаштаг</span>
-            <span class="info-row-value">#ЖивкоИКатерина2026</span>
-          </div>
         </div>
       </div>
 

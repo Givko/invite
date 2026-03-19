@@ -847,9 +847,15 @@ a > .info-card:hover::after {
   font-size:14px; color:var(--gold-pale);
   cursor:pointer;
 }
-.dietary-option input[type="checkbox"] {
+.dietary-option input[type="radio"] {
   width:16px; height:16px; accent-color:var(--gold);
   cursor:pointer;
+}
+.dietary-allergy-label {
+  display:block;
+  font-family:'Nunito Sans',sans-serif;
+  font-size:13px; color:var(--gold-pale); opacity:.7;
+  margin-bottom:4px; margin-top:4px;
 }
 
 .field select {
