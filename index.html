@@ -204,7 +204,15 @@
             </div>
             <div class="field">
               <label>Хранителни изисквания</label>
-              <input type="text" id="dietary" placeholder="Алергии, вегетарианец и т.н.">
+              <div class="dietary-options">
+                <label class="dietary-option">
+                  <input type="checkbox" id="dietVegetarian" value="Вегетарианец"> Вегетарианец
+                </label>
+                <label class="dietary-option">
+                  <input type="checkbox" id="dietNone" value="Без"> Без изисквания
+                </label>
+              </div>
+              <input type="text" id="dietary" placeholder="Алергии или други изисквания...">
             </div>
           </div>
 
@@ -404,7 +412,7 @@
               <path d="M3 13h24"/>
             </svg>
           </div>
-          <div class="ds-title">Нощувки</div>
+          <div class="ds-title">Нощувки (Осигурени)</div>
         </div>
         <div class="info-rows">
           <div class="info-row">
@@ -437,7 +445,7 @@
               <path d="M6.5 10l3-5h11l3 5"/>
             </svg>
           </div>
-          <div class="ds-title">Транспорт</div>
+          <div class="ds-title">Транспорт (Осигурен)</div>
         </div>
         <div class="info-rows">
           <div class="info-row">

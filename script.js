@@ -805,7 +805,12 @@
 
     if (isAttending) {
       data['👥 Брой гости']            = document.getElementById('guestCount').value + ' гост(и)';
-      data['🍽️ Хранителни изисквания'] = document.getElementById('dietary').value || 'Няма';
+      var dietChoices = [];
+      if (document.getElementById('dietVegetarian').checked) dietChoices.push('Вегетарианец');
+      if (document.getElementById('dietNone').checked) dietChoices.push('Без изисквания');
+      var dietText = document.getElementById('dietary').value;
+      if (dietText) dietChoices.push(dietText);
+      data['🍽️ Хранителни изисквания'] = dietChoices.length ? dietChoices.join(', ') : 'Няма';
       data['🏨 Хотелска стая']         = checks.hotel     ? 'Да — 1 нощ (29 юни)' : 'Не';
       data['🚗 Транспорт']             = checks.transport ? 'Да' : 'Не';
       data['👶 Деца']                  = checks.children

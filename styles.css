@@ -837,6 +837,21 @@ a > .info-card:hover::after {
   font-style: italic;
 }
 
+.dietary-options {
+  display:flex; flex-wrap:wrap; gap:10px 18px;
+  margin-bottom:10px;
+}
+.dietary-option {
+  display:flex; align-items:center; gap:7px;
+  font-family:'Nunito Sans',sans-serif;
+  font-size:14px; color:var(--gold-pale);
+  cursor:pointer;
+}
+.dietary-option input[type="checkbox"] {
+  width:16px; height:16px; accent-color:var(--gold);
+  cursor:pointer;
+}
+
 .field select {
   cursor: pointer;
   appearance: none;
