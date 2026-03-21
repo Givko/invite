@@ -37,8 +37,8 @@
     <span class="hero-amp reveal reveal-d3">&amp;</span>
     <h1 class="hero-name reveal reveal-d3">Катерина</h1>
     <p class="hero-tagline reveal reveal-d4">
-      Имаме удоволствието да Ви поканим<br>
-      на тържеството по случай нашата сватба
+      С най-голямо удоволствие Ви канят<br>
+      да отпразнувате заедно най-специалния им ден
     </p>
     <div class="hero-date-box reveal reveal-d5">
       <p class="hero-date">29 юни 2026</p>
@@ -155,7 +155,7 @@
     <!-- ── RSVP Form ── -->
     <div class="form-container" id="rsvpFormContainer">
       <h3 class="form-title">Потвърждение</h3>
-      <p class="form-subtitle">Ще се радваме да чуем от Вас</p>
+      <p class="form-subtitle">Ще се радваме да чуем от Вас. Един от семейството може да потвърди за всички.</p>
 
       <form onsubmit="return handleSubmit(event)">
 
@@ -189,7 +189,7 @@
         <div class="attending-fields" id="attendingFields">
           <div class="form-row">
             <div class="field">
-              <label>Брой гости</label>
+              <label>Брой гости (включително Вас и Вашата половинка)</label>
               <select id="guestCount">
                 <option value="1">1 гост</option>
                 <option value="2">2 гости</option>
@@ -215,7 +215,7 @@
 
           <!-- Extra options -->
           <div class="options-box">
-            <label>Допълнителни опции</label>
+            <label>Допълнителни опции — вижте „Повече детайли" за повече информация</label>
 
             <!-- Hotel -->
             <div class="checkbox-row" onclick="toggleCheck('hotel')">
@@ -225,11 +225,11 @@
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <span class="checkbox-label">Моля, резервирайте ми хотелска стая</span>
+              <span class="checkbox-label">Имам нужда от нощувка (осигурена)</span>
             </div>
             <div class="sub-field" id="hotelSub">
               <p style="font-size:13px;color:var(--gold-pale);margin:0;font-style:italic">
-                Нощувката е 1 нощ (29 юни)
+                Нощувката е за 1 нощ (29 юни). Местата все още се уточняват.
               </p>
             </div>
 
@@ -241,7 +241,7 @@
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <span class="checkbox-label">Бих искал/а транспорт до/от мястото</span>
+              <span class="checkbox-label">Имам нужда от транспорт (осигурен)</span>
             </div>
 
             <!-- Children -->
@@ -271,7 +271,7 @@
 
         <!-- Message -->
         <div class="field" style="margin-bottom:24px">
-          <label>Послание за двойката</label>
+          <label>Послание за младоженците (по желание)</label>
           <textarea id="guestMessage" placeholder="Споделете пожеланията си..."></textarea>
         </div>
 
@@ -454,18 +454,71 @@
             <span class="info-row-value">00:00, 01:00, 02:00, 03:00, 04:00 (последен)</span>
           </div>
         </div>
+        <p class="info-note" style="margin-top:10px;">
+          Транспортът ще бъде от Естера Вини към местата, където ще нощуват гостите (все още се уточняват), които нямат къде да пренощуват. Организиран транспорт от Пловдив до Естера Вини все още не е потвърден, тъй като търсим най-добрия вариант. Очаквайте повече информация скоро.
+        </p>
+      </div>
+
+      <!-- Потвърждение и +1 -->
+      <div class="detail-section">
+        <div class="ds-header">
+          <div class="ds-icon" style="width:52px;">
+            <svg viewBox="0 0 50 30" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Adult 1 (left) -->
+              <circle cx="10" cy="5" r="3"/>
+              <line x1="10" y1="8" x2="10" y2="18"/>
+              <line x1="10" y1="18" x2="6" y2="27"/>
+              <line x1="10" y1="18" x2="14" y2="27"/>
+              <line x1="10" y1="11" x2="5" y2="15"/>
+              <line x1="10" y1="11" x2="15" y2="15"/>
+              <!-- Child (middle) -->
+              <circle cx="25" cy="11" r="2.5"/>
+              <line x1="25" y1="13.5" x2="25" y2="21"/>
+              <line x1="25" y1="21" x2="22" y2="27"/>
+              <line x1="25" y1="21" x2="28" y2="27"/>
+              <line x1="25" y1="16" x2="21.5" y2="19"/>
+              <line x1="25" y1="16" x2="28.5" y2="19"/>
+              <!-- Adult 2 (right) -->
+              <circle cx="40" cy="5" r="3"/>
+              <line x1="40" y1="8" x2="40" y2="18"/>
+              <line x1="40" y1="18" x2="36" y2="27"/>
+              <line x1="40" y1="18" x2="44" y2="27"/>
+              <line x1="40" y1="11" x2="35" y2="15"/>
+              <line x1="40" y1="11" x2="45" y2="15"/>
+            </svg>
+          </div>
+          <div class="ds-title">Потвърждение и +1</div>
+        </div>
+        <p class="info-note" style="margin-top:10px;">
+          Разбира се, очакваме Ви заедно с Вашата половинка! Не е необходимо всеки да попълва формуляра поотделно — един от Вас може да потвърди за цялото семейство. Във формата за потвърждение (RSVP) има падащо меню, от което можете да изберете колко души ще бъдете.
+        </p>
       </div>
 
       <!-- Дрескод -->
       <div class="detail-section">
         <div class="ds-header">
-          <div class="ds-icon">
+          <div class="ds-icon" style="width:68px; display:flex; gap:4px;">
+            <!-- Dress -->
             <svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 6c1 .5 3 .8 6 .8s5-.3 6-.8"/>
               <path d="M9 6C7 8 6 10 6 13c0 1.5.5 3 1.2 4.3"/>
               <path d="M21 6c2 2 3 4 3 7 0 1.5-.5 3-1.2 4.3"/>
               <path d="M8 17L4 27h22l-4-9.7"/>
               <line x1="15" y1="6.8" x2="15" y2="12"/>
+            </svg>
+            <!-- Suit: jacket + trousers -->
+            <svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Jacket outline -->
+              <path d="M11 3L7 6v11h5v-2h6v2h5V6l-4-3"/>
+              <!-- Lapels -->
+              <path d="M11 3l4 6"/>
+              <path d="M19 3l-4 6"/>
+              <!-- Tie -->
+              <line x1="15" y1="9" x2="15" y2="16"/>
+              <!-- Trouser left leg -->
+              <path d="M8 17h6v10H9z"/>
+              <!-- Trouser right leg -->
+              <path d="M16 17h6v10h-5z"/>
             </svg>
           </div>
           <div class="ds-title">Дрескод — Официален</div>
