@@ -731,7 +731,7 @@
     el.classList.add('selected');
 
     var fields = document.getElementById('attendingFields');
-    if (value === 'С радост приемам') {
+    if (value === 'С радост приемаме') {
       fields.classList.add('active');
     } else {
       fields.classList.remove('active');
@@ -786,7 +786,7 @@
       return false;
     }
 
-    var isAttending = attending === 'С радост приемам';
+    var isAttending = attending === 'С радост приемаме';
 
     // Build form data for AJAX submission
     var emoji = isAttending ? '✅' : '❌';
@@ -797,7 +797,7 @@
       '_template': 'table',
       '_replyto':  'noreply@wedding.com',
       '👤 Име':                   name,
-      '✉️ Отговор':               isAttending ? '✅ С радост приемам' : '❌ За съжаление не мога'
+      '✉️ Отговор':               isAttending ? '✅ С радост приемаме' : '❌ За съжаление не можем'
     };
 
     if (isAttending) {
