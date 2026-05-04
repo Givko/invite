@@ -1310,6 +1310,16 @@ a > .info-card:hover::after {
   margin-top:12px;
   line-height:1.6;
 }
+.info-note a {
+  color:var(--gold);
+  text-decoration:none;
+  border-bottom:1px solid rgba(201,169,110,.3);
+  transition:border-color var(--T), color var(--T);
+}
+.info-note a:hover {
+  color:#fff;
+  border-color:rgba(255,255,255,.5);
+}
 
 .swatches { display:flex; gap:8px; margin-top:2px; flex-wrap:wrap; }
 .swatch {
